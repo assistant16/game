@@ -7,26 +7,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
 public class QuestionServiceImpl implements QuestionService {
 
-    @PersistenceContext
-    private EntityManager entityManager;
-
+    @Autowired
     private QuestionRepository QuestionRepository;
 
     @Override
+    @Transactional
     public Question addQuestion(Question question) {
         return QuestionRepository.save(question);
     }
 
     @Override
+    @Transactional
     public List<Question> getAllQuestions() {
         List<Question> questions = new ArrayList<>();
             questions.addAll(QuestionRepository.findAll());
@@ -35,8 +34,9 @@ public class QuestionServiceImpl implements QuestionService {
 
 
     @Override
-    public Question findByIdQuestion(int id) {
-        return entityManager.find(Question.class,id);//questionRepository.findById(id);
+    @Transactional
+    public Optional<Question> getByIdQuestion(Long id) {
+        return QuestionRepository.findById(id);
     }
 
 

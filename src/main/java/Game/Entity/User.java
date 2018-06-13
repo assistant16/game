@@ -1,6 +1,10 @@
 package Game.Entity;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "User")
@@ -8,7 +12,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
+    private Long Id;
     private String name;
     private String password;
     private String email;
@@ -22,11 +26,11 @@ public class User {
     }
 
     public Long getId() {
-        return id;
+        return Id;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.Id = id;
     }
 
     public String getName() {
@@ -56,13 +60,28 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
+                "Id=" + Id +
                 ", name='" + name + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(Id, user.Id) &&
+                Objects.equals(name, user.name) &&
+                Objects.equals(password, user.password) &&
+                Objects.equals(email, user.email);
+    }
 
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(Id, name, password, email);
+    }
 }
 

@@ -1,14 +1,19 @@
 package Game.Service.Impl;
 
 
+import Game.Entity.Score;
 import Game.Entity.User;
 import Game.Repository.UserRepository;
 import Game.Service.UserService;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
+
+
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,20 +21,21 @@ import java.util.Optional;
 @Transactional
 public class UserServiceImpl implements UserService {
 
+    @Autowired
     private UserRepository UserRepository;
+
 
     @Override
     @Transactional
     public User addUser(User user){
+        //User user1 = new User("qwe","qwe","qwe");
         return UserRepository.save(user);
     }
 
     @Override
     @Transactional
     public List<User> getAllUsers(){
-        List<User> users = new ArrayList<>();
-            users.addAll(UserRepository.findAll());
-        return users;
+        return UserRepository.findAll();
     }
 
     @Override

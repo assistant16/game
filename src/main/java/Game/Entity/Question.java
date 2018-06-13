@@ -6,15 +6,15 @@ import javax.persistence.*;
 public class Question {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
-    private String question;
+    private String questionName;
     private int answer;
 
     public Question(){}
 
-    public Question(String question, int answer) {
-        this.question = question;
+    public Question(String questionName, int answer) {
+        this.questionName = questionName;
         this.answer = answer;
     }
 
@@ -27,11 +27,11 @@ public class Question {
     }
 
     public String getQuestion() {
-        return question;
+        return questionName;
     }
 
-    public void setQuestion(String question) {
-        this.question = question;
+    public void setQuestion(String questionName) {
+        this.questionName = questionName;
     }
 
     public int getAnswer() {
@@ -46,7 +46,7 @@ public class Question {
     public String toString() {
         return "QuestionDto{" +
                 "id=" + id +
-                ", question='" + question + '\'' +
+                ", question='" + questionName + '\'' +
                 ", answer=" + answer +
                 '}';
     }

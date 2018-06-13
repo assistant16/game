@@ -2,20 +2,26 @@ package Game.DTO;
 
 public class UserDto {
 
-    private Long id;
+    private Long Id;
     private String name;
     private String password;
     private String email;
 
     public UserDto(){}
 
-
-    public Long getId() {
-        return id;
+    public UserDto(Long id, String name, String password, String email) {
+        this.Id = Id;
+        this.name = name;
+        this.password = password;
+        this.email = email;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public Long getId() {
+        return Id;
+    }
+
+    public void setId(Long Id) {
+        this.Id = Id;
     }
 
     public String getName() {

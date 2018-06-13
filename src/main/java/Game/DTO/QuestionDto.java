@@ -2,7 +2,7 @@ package Game.DTO;
 
 public class QuestionDto {
     private Long id;
-    private String question;
+    private String questionName;
     private int answer;
 
     public QuestionDto(){}
@@ -16,11 +16,11 @@ public class QuestionDto {
     }
 
     public String getQuestion() {
-        return question;
+        return questionName;
     }
 
-    public void setQuestion(String question) {
-        this.question = question;
+    public void setQuestion(String questionName) {
+        this.questionName = questionName;
     }
 
     public int getAnswer() {

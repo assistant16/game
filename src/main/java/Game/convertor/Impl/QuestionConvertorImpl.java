@@ -1,4 +1,4 @@
-package Game.convertorImpl;
+package Game.convertor.Impl;
 
 import Game.DTO.QuestionDto;
 import Game.Entity.Question;

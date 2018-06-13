@@ -1,10 +1,9 @@
-
 package GamePuzzle.serviceTestIT.NewsService;
 
+
 import Game.ApplicationTest;
-import Game.Entity.User;
-import Game.Service.Impl.UserServiceImpl;
-import Game.Service.UserService;
+import Game.Entity.Question;
+import Game.Service.Impl.QuestionServiceImpl;
 import GamePuzzle.serviceTestIT.BaseServiceTest;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
@@ -17,7 +16,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -26,39 +25,36 @@ import static org.assertj.core.api.Assertions.assertThat;
 @EnableAutoConfiguration
 @AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
 @AutoConfigureTestEntityManager
-public class UserServiceTestIT extends BaseServiceTest {
+public class QuestionServiceTestIT extends BaseServiceTest {
 
     @Autowired
     TestEntityManager entityManager;
 
     @Autowired
-    protected UserServiceImpl userServiceImpl;
+    protected QuestionServiceImpl questionServiceImpl;
 
     @Test
-    public void findByIdUserTest() throws Exception {
-        User user = new User("tes432r2", "312", "qwe");
-        entityManager.persist(user);
+    public void getByIdQuestionTest() throws Exception {
+        Question question = new Question("test",2);
+        entityManager.persist(question);
         entityManager.flush();
-        User found = userServiceImpl.getByIdUser(user.getId()).orElseThrow(() -> new Exception());
+        Question found = questionServiceImpl.getByIdQuestion(question.getId()).orElseThrow(() -> new Exception());
 
-        Assertions.assertEquals(found.getId(), user.getId());
+        Assertions.assertEquals(found.getId(), question.getId());
     }
 
     @Test
-    public void addUserTest() throws Exception {
-        User firstUser = new User("test", "test", "test");
-        User secondUser = new User("test2", "test2", "test2");
-        userServiceImpl.addUser(firstUser);
+    public void addQuestionTest() {
+        Question question1 = new Question("test1", 1);
+        Question question2 = new Question("test2", 2);
+        questionServiceImpl.addQuestion(question1);
+        questionServiceImpl.addQuestion(question2);
 
-        userServiceImpl.addUser(secondUser);
+        Question savedQuestion = this.entityManager.persistFlushFind(question1);
 
-        User savedUser = this.entityManager.persistFlushFind(secondUser);
-
-        assertThat(savedUser.getId()).isNotNull();
-        assertThat(savedUser.getName()).isEqualTo("test2");
-        assertThat(savedUser.getPassword()).isEqualTo("test2");
-        assertThat(savedUser.getEmail()).isEqualTo("test2");
-
-
+        assertThat(savedQuestion.getId()).isNotNull();
+        assertThat(savedQuestion.getQuestion()).isEqualTo("test1");
+        assertThat(savedQuestion.getAnswer()).isEqualTo(1);
     }
 }
+

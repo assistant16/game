@@ -6,25 +6,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/api/question")
 public class QuestionController {
 
     private QuestionServiceImpl questionServiceImpl;
 
 
+
+
     @RequestMapping("/addQ")
-    public String addQ(@RequestParam String name, @RequestParam int answer) {
-        questionServiceImpl.addQuestion(new Question(name,answer));
+    public String addQ(@RequestParam String questionName, @RequestParam int answer) {
+        questionServiceImpl.addQuestion(new Question(questionName,answer));
         return ("added");
     }
 
-    @RequestMapping("/showQ")
-    public String showQ(){
-        return questionServiceImpl.getAllQuestions().toString();
-    }
+   // @RequestMapping("/showQ")
+//    public String showQ(){
+//        return questionServiceImpl.getAllQuestions().toString();
+//    }
 
     @GetMapping("/findQ")
-    public String findByIdQuestion(@RequestParam int id){
-        return questionServiceImpl.findByIdQuestion(id).toString();
+    public String getByIdQuestion(@RequestParam Long id){
+        return questionServiceImpl.getByIdQuestion(id).toString();
     }
 
 }

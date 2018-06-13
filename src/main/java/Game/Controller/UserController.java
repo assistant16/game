@@ -5,16 +5,19 @@ import Game.DTO.UserDto;
 import Game.Entity.User;
 import Game.Service.Impl.UserServiceImpl;
 import Game.convertor.UserConvertor;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 
-import java.io.File;
+import java.util.List;
+import java.util.Optional;
 
 @RestController
+@RequestMapping("/api/user")
 public class UserController {
 
         private UserServiceImpl serviceUserImpl;
@@ -34,9 +37,14 @@ public class UserController {
                 return userConvertor.toDto(user);
         }
 
-        @RequestMapping(name = "/view",method = RequestMethod.GET)
-        public String getAllUsers(){
-               return serviceUserImpl.getAllUsers().toString();
+        @GetMapping(name = "/viewAll",produces = MediaType.APPLICATION_JSON_VALUE)
+        public List<User> getAllUsers(){
+               return serviceUserImpl.getAllUsers();
+        }
+
+        @GetMapping(value = "userId/{userId}",produces = MediaType.APPLICATION_JSON_VALUE)
+        public Optional<User> getByIdUser(@PathVariable("userId") Long id){
+                return serviceUserImpl.getByIdUser(id);
         }
 
         @RequestMapping("/")
