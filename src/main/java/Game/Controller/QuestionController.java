@@ -5,13 +5,13 @@ import Game.Service.Impl.QuestionServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/question")
 public class QuestionController {
 
     private QuestionServiceImpl questionServiceImpl;
-
-
 
 
     @RequestMapping("/addQ")
@@ -20,10 +20,10 @@ public class QuestionController {
         return ("added");
     }
 
-   // @RequestMapping("/showQ")
-//    public String showQ(){
-//        return questionServiceImpl.getAllQuestions().toString();
-//    }
+    @RequestMapping("/showQ")
+    public List<Question> showQ(){
+        return questionServiceImpl.getAllQuestions();
+    }
 
     @GetMapping("/findQ")
     public String getByIdQuestion(@RequestParam Long id){

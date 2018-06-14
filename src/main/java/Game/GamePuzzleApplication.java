@@ -9,6 +9,7 @@ import Game.Service.Impl.QuestionServiceImpl;
 import Game.Service.Impl.UserServiceImpl;
 import Game.Service.QuestionService;
 import Game.Service.UserService;
+import Game.convertor.Impl.UserConvertorImpl;
 import Game.convertor.UserConvertor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,11 @@ public class GamePuzzleApplication {
 	UserServiceImpl userServiceImpl;
 
 	@Autowired
+	UserController userController;
+
+	UserConvertorImpl userConvertorImpl;
+
+	@Autowired
 	QuestionServiceImpl questionServiceImpl;
 
 
@@ -41,20 +47,25 @@ public class GamePuzzleApplication {
 		public void init() {
 
 			//UserController userController = new UserController();
-			userServiceImpl.addUser(new User( "vasya", "vasya", "vasya"));
-			userServiceImpl.addUser(new User( "vasya2", "vasya2", "vasya2"));
-			userServiceImpl.addUser(new User( "vasya3", "vasya3", "vasya3"));
-			questionServiceImpl.addQuestion(new Question("what the fuck?",404));
-			//userController.addUser(userConvertor.toDto(new User("petya","petya","petya")));
+			userServiceImpl.addUser(new User( "user1", "user1", "user1"));
+			userServiceImpl.addUser(new User( "user2", "user2", "user2"));
+			userServiceImpl.addUser(new User( "user3", "user3", "user3"));
+			questionServiceImpl.addQuestion(new Question("what's wrong?",404));
+
+			User userP = new User("petya","petya","petya");
+			userController.addUser2(userP);
+			//userConvertorImpl.toDto(userP);
+			//
+			userServiceImpl.getAllUsers();
 
 		}
 //
 //	@Bean
-//	CommandLineRunner runner(QuestionRepository questionRepository){
+//	CommandLineRunner runner(UserController userController){
 //	    return args -> {
-//			questionRepository.save(new Question("vasya",2));
-//        };
-//	}
+//			userController.addUser2(new User("vasya","vasya","vasya"));
+//	};
+//}
 
 //	@Bean
 //	CommandLineRunner runner(QuestionServiceImpl questionService) {
