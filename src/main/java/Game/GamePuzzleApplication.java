@@ -51,12 +51,14 @@ public class GamePuzzleApplication {
 			userServiceImpl.addUser(new User( "user2", "user2", "user2"));
 			userServiceImpl.addUser(new User( "user3", "user3", "user3"));
 			questionServiceImpl.addQuestion(new Question("what's wrong?",404));
+			questionServiceImpl.addQuestion(new Question("what's else?",909));
+			questionServiceImpl.addQuestion(new Question("how r u?",49));
 
 			User userP = new User("petya","petya","petya");
 			userController.addUser2(userP);
 			//userConvertorImpl.toDto(userP);
 			//
-			userServiceImpl.getAllUsers();
+			//userServiceImpl.getAllUsers();
 
 		}
 //

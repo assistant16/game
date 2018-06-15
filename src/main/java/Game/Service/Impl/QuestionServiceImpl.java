@@ -27,9 +27,7 @@ public class QuestionServiceImpl implements QuestionService {
     @Override
     @Transactional
     public List<Question> getAllQuestions() {
-        List<Question> questions = new ArrayList<>();
-            questions.addAll(QuestionRepository.findAll());
-        return questions;
+        return QuestionRepository.findAll();
     }
 
 
