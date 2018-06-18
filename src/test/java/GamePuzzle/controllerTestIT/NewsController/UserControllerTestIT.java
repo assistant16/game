@@ -1,8 +1,8 @@
 package GamePuzzle.controllerTestIT.NewsController;
 
-import Game.Controller.UserController;
-import Game.Entity.User;
-import Game.Service.Impl.UserServiceImpl;
+import Game.controller.UserController;
+import Game.entity.User;
+import Game.service.Impl.UserServiceImpl;
 import Game.convertor.UserConvertor;
 import GamePuzzle.controllerTestIT.BaseRestControllerTest;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -14,10 +14,8 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Bean;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
-import org.springframework.test.web.servlet.MockMvcBuilder;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -27,7 +25,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.BDDMockito.given;
 
 
 @WebMvcTest(UserController.class)

@@ -1,4 +1,4 @@
-package Game.DTO;
+package Game.dto;
 
 public class UserDto {
 

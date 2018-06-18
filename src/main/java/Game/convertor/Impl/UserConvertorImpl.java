@@ -1,7 +1,7 @@
 package Game.convertor.Impl;
 
-import Game.DTO.UserDto;
-import Game.Entity.User;
+import Game.dto.UserDto;
+import Game.entity.User;
 import Game.convertor.UserConvertor;
 
 public class UserConvertorImpl implements UserConvertor{

@@ -1,19 +1,13 @@
 package Game;
 
-import Game.Controller.UserController;
-import Game.DTO.UserDto;
-import Game.Entity.Question;
-import Game.Entity.User;
-import Game.Repository.QuestionRepository;
-import Game.Service.Impl.QuestionServiceImpl;
-import Game.Service.Impl.UserServiceImpl;
-import Game.Service.QuestionService;
-import Game.Service.UserService;
+import Game.controller.UserController;
+import Game.entity.Question;
+import Game.entity.User;
+import Game.service.Impl.QuestionServiceImpl;
+import Game.service.Impl.UserServiceImpl;
 import Game.convertor.Impl.UserConvertorImpl;
-import Game.convertor.UserConvertor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -43,16 +37,18 @@ public class GamePuzzleApplication {
 	QuestionServiceImpl questionServiceImpl;
 
 
-		@PostConstruct
+		@PostConstruct   //need to add at entity
 		public void init() {
 
 			//UserController userController = new UserController();
-			userServiceImpl.addUser(new User( "user1", "user1", "user1"));
-			userServiceImpl.addUser(new User( "user2", "user2", "user2"));
-			userServiceImpl.addUser(new User( "user3", "user3", "user3"));
 			questionServiceImpl.addQuestion(new Question("what's wrong?",404));
 			questionServiceImpl.addQuestion(new Question("what's else?",909));
 			questionServiceImpl.addQuestion(new Question("how r u?",49));
+
+			userServiceImpl.addUser(new User( "user1", "user1", "user1"));
+			userServiceImpl.addUser(new User( "user2", "user2", "user2"));
+			userServiceImpl.addUser(new User( "user3", "user3", "user3"));
+
 
 			User userP = new User("petya","petya","petya");
 			userController.addUser2(userP);

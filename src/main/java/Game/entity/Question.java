@@ -1,4 +1,4 @@
-package Game.Entity;
+package Game.entity;
 
 import javax.persistence.*;
 

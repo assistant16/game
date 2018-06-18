@@ -1,7 +1,7 @@
 package Game.convertor;
 
-import Game.DTO.ScoreDto;
-import Game.Entity.Score;
+import Game.dto.ScoreDto;
+import Game.entity.Score;
 
 public interface ScoreConvertor {
     ScoreDto toDto(Score score);

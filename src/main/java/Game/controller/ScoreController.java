@@ -1,8 +1,8 @@
-package Game.Controller;
+package Game.controller;
 
-import Game.DTO.ScoreDto;
-import Game.Entity.Score;
-import Game.Service.Impl.ScoreServiceImpl;
+import Game.dto.ScoreDto;
+import Game.entity.Score;
+import Game.service.Impl.ScoreServiceImpl;
 import Game.convertor.ScoreConvertor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

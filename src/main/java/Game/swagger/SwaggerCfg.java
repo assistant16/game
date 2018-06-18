@@ -1,4 +1,4 @@
-package Game.Swagger;
+package Game.swagger;
 
 
 import org.springframework.context.annotation.Bean;

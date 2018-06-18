@@ -1,72 +1,46 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="userController">
+<html lang="en" ng-app="app">
 <head>
     <meta charset="UTF-8">
     <title>mainPageTitle</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <script type="text/javascript" src="js/angular.min.js"></script>
-    <script type="text/javascript" src="js/userController.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+    <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
 </head>
-<body>
-    <div ng-controller="postUserController">
-        <form class="form-horizontal"  style="margin-top: 30px" name="UserForm" >
-            <div class="form-group">
-                <label class="control-label col-sm-2" for="nameID">Name:</label>
-                <div class="col-sm-5">
-                    <input type="text" class="form-control" name="name" id="nameID"
-                           placeholder="Enter Name" ng-model="name"/>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-sm-2" for="passwordID">Password:</label>
-                <div class="col-sm-5">
-                    <input type="text" class="form-control" name="password" id="passwordID"
-                           placeholder="Enter Password" ng-model="password"/>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-sm-2" for="emailID">Email:</label>
-                <div class="col-sm-5">
-                    <input type="text" class="form-control" name="email" id="emailID"
-                           placeholder="Enter Email" ng-model="email"/>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                    <button type="submit" class="btn btn-default">Add</button>
-                </div>
-            </div>
-        </form>
+<body ng-controller="getRandomQuestionController">
+    <div class="form-group">
+        <div class="col-sm-offset-1 col-sm-5">
+            <button type="button" class="btn btn-random" ng-click="getRandomQuestion()">Random question</button>
+        </div>
     </div>
 
-    <div class="container" style="margin-top: 30px" ng-controller="getUserController">
+    <div class="container" style="margin-top: 30px" style="margin-bottom: 30px">
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Some user's information</div>
-                    <div class="panel-body">
-                        <table class="table table-striped">
-                            <thead>
-                            <tr>
-                                <th>id</th>
-                                <th>name</th>
-                                <th>password</th>
-                                <th>email</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr ng-repeat="item in UserTable">
-                                <td>{{item.id}}</td>
-                                <td>{{item.name}}</td>
-                                <td>{{item.password}}</td>
-                                <td>{{item.email}}</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                    <div class="panel-heading">Random question</div>
+                    <table class="table ">
+                        <tbody ng-model="RandomQuestion">
+                        <td>{{RandomQuestion.question}}</td>
+                        <td>{{RandomQuestion.answer}}</td>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
+
+    <form class="form-horizontal" style="margin-top: 30px" name="AnswerForm" >
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="answerID">Answer:</label>
+            <div class="col-sm-5">
+                <input type="text" class="form-control" name="answer" id="answerID"
+                       placeholder="Enter answer" ng-model="localeAnswer"/>
+                <button type="button" class="btn btn-try" ng-click="tryAnswer(RandomQuestion,localeAnswer)">Try answer</button>
+            </div>
+        </div>
+    </form>
 </body>
 </html>

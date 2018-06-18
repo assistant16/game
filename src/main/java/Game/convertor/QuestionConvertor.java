@@ -1,7 +1,7 @@
 package Game.convertor;
 
-import Game.DTO.QuestionDto;
-import Game.Entity.Question;
+import Game.dto.QuestionDto;
+import Game.entity.Question;
 
 public interface QuestionConvertor {
     Question toQuestion(QuestionDto questionDto);

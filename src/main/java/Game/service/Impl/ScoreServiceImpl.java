@@ -1,8 +1,8 @@
-package Game.Service.Impl;
+package Game.service.Impl;
 
-import Game.Entity.Score;
-import Game.Repository.ScoreRepository;
-import Game.Service.ScoreService;
+import Game.entity.Score;
+import Game.repository.ScoreRepository;
+import Game.service.ScoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;

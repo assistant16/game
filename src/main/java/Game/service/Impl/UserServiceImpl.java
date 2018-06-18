@@ -1,10 +1,9 @@
-package Game.Service.Impl;
+package Game.service.Impl;
 
 
-import Game.Entity.Score;
-import Game.Entity.User;
-import Game.Repository.UserRepository;
-import Game.Service.UserService;
+import Game.entity.User;
+import Game.repository.UserRepository;
+import Game.service.UserService;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
-
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 

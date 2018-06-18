@@ -1,6 +1,6 @@
-package Game.Service;
+package Game.service;
 
-import Game.Entity.Score;
+import Game.entity.Score;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

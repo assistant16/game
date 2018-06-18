@@ -1,7 +1,7 @@
 package Game.convertor.Impl;
 
-import Game.DTO.ScoreDto;
-import Game.Entity.Score;
+import Game.dto.ScoreDto;
+import Game.entity.Score;
 import Game.convertor.ScoreConvertor;
 
 public class ScoreConvertorImpl implements ScoreConvertor {

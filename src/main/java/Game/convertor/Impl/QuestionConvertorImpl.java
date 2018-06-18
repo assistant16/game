@@ -1,7 +1,7 @@
 package Game.convertor.Impl;
 
-import Game.DTO.QuestionDto;
-import Game.Entity.Question;
+import Game.dto.QuestionDto;
+import Game.entity.Question;
 import Game.convertor.QuestionConvertor;
 
 public class QuestionConvertorImpl implements QuestionConvertor{

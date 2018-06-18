@@ -1,7 +1,7 @@
-package Game.Controller;
+package Game.controller;
 
-import Game.Entity.Question;
-import Game.Service.Impl.QuestionServiceImpl;
+import Game.entity.Question;
+import Game.service.Impl.QuestionServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -22,19 +22,32 @@ public class QuestionController {
         return ("added");
     }
 
-//    @GetMapping(value = "/RandomQ",produces = MediaType.APPLICATION_JSON_VALUE)
-//    public Question  showRandom(){
-//
-//    }
+    @GetMapping(value = "/RandomQ",produces = MediaType.APPLICATION_JSON_VALUE)
+    public Optional<Question>  showRandom(){
+        int coutOfQuestions = 3;
+        return getByIdQuestion(1L + (long)(Math.random() * coutOfQuestions));
+    }
 
     @GetMapping(value = "/viewQ",produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Question> showQ(){
         return questionServiceImpl.getAllQuestions();
     }
 
-    @GetMapping("/findQ")
-    public String getByIdQuestion(@RequestParam Long id){
-        return questionServiceImpl.getByIdQuestion(id).toString();
+    @GetMapping("/winQ")
+    public String winQ() {
+        return ("You win game");
+    }
+
+    @GetMapping("/tryQ")
+    public String tryQ(){
+        return ("Try one more time");
+    }
+
+
+
+    @GetMapping(value = "/questionId/{Id}",produces = MediaType.APPLICATION_JSON_VALUE)
+    public Optional<Question> getByIdQuestion(@PathVariable("Id") Long id){
+        return questionServiceImpl.getByIdQuestion(id);
     }
 
 }

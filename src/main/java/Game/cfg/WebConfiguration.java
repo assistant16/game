@@ -1,4 +1,4 @@
-package Game.Cfg;
+package Game.cfg;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.RequestMapping;

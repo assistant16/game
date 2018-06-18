@@ -2,9 +2,8 @@
 package GamePuzzle.serviceTestIT.NewsService;
 
 import Game.ApplicationTest;
-import Game.Entity.User;
-import Game.Service.Impl.UserServiceImpl;
-import Game.Service.UserService;
+import Game.entity.User;
+import Game.service.Impl.UserServiceImpl;
 import GamePuzzle.serviceTestIT.BaseServiceTest;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
@@ -16,8 +15,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureTestEnti
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
-
-import javax.persistence.EntityManager;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

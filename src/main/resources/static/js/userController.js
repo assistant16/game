@@ -2,31 +2,24 @@ var app = angular.module("userController",[]);
 
 
 app.controller('getUserController', function ($scope,$http) {
-        $scope.UserTable = [];
-
-        $http.get('http://localhost:8080/api/user/viewU').then(function (response) {
-            $scope.UserTable = response.data;
-        });
+    // $scope.getAllUsers = function () {
+    $http.get('http://localhost:8080/api/user/viewU').then(function (response) {
+        $scope.UserTable = response.data;
+    });
+    // }
 });
 
-﻿
-
 app.controller('postUserController', function($scope, $http) {
-    var url = 'http://localhost:8080/api/user/addingU';
+    $scope.submitForm = function(item) {
 
-    var data = {
-        name: $scope.name,
-        password: $scope.password,
-        email: $scope.emacr
-    };
+        var url = 'http://localhost:8080/api/user/adding';
 
-    $http.post(url, data).then(function (response) {
-        $scope.postResultMessage = response.data;
-    }, function error(response) {
-        $scope.postResultMessage = "Error with status: " +  response.statusText;
-    });
+        $http.post(url, item).then(function (response) {
+            $scope.item = response.data;
+        });
 
-    $scope.name = "";
-    $scope.password = "";
-    $scope.email = "";
+        $scope.name = "";
+        $scope.password = "";
+        $scope.email = "";
+    }
 });

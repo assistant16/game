@@ -1,6 +1,6 @@
-package Game.Repository;
+package Game.repository;
 
-import Game.Entity.Question;
+import Game.entity.Question;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

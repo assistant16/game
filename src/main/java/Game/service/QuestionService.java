@@ -1,7 +1,6 @@
-package Game.Service;
+package Game.service;
 
-import Game.Entity.Question;
-import Game.Repository.QuestionRepository;
+import Game.entity.Question;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

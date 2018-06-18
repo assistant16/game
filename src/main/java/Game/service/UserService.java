@@ -1,7 +1,7 @@
-package Game.Service;
+package Game.service;
 
 
-import Game.Entity.User;
+import Game.entity.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
