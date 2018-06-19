@@ -11,17 +11,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
 import javax.annotation.PostConstruct;
+import java.net.Authenticator;
 
+@EnableWebSecurity
 @SpringBootApplication
+
 public class GamePuzzleApplication {
 
 
 	public static void main(String[] args) {
 		SpringApplication.run(GamePuzzleApplication.class, args);
 	}
-
 
 	//@Component
 	//public class StartUpInit {
@@ -64,16 +68,6 @@ public class GamePuzzleApplication {
 //			userController.addUser2(new User("vasya","vasya","vasya"));
 //	};
 //}
-
-//	@Bean
-//	CommandLineRunner runner(QuestionServiceImpl questionService) {
-//		return args -> {
-//			questionService.addQuestion(new Question("vasya2", 3));
-//		};
-//    }
-
-
-
 	@Bean
 	public ModelMapper modelMapper() {
 		return new ModelMapper();

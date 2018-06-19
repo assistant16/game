@@ -1,7 +1,7 @@
 var app = angular.module("app",[]);
-
-ws = new WebSocket('ws://localhost:8080/api');
-ws.onmessage = function(data){};
+//
+// ws = new WebSocket('ws://localhost:8080/api');
+// ws.onmessage = function(data){};
 
 
 app.controller('getUserController', function ($scope,$http) {
@@ -43,9 +43,24 @@ app.controller('getRandomQuestionController', function ($scope,$http) {
         });
     };
 
-    $scope.tryAnswer=function(response) {
-
-    }
+    $scope.tryAnswer = function(RandomQuestion,localAnswer) {
+            $scope.firstArgument = localAnswer;
+            $scope.secondArgument = RandomQuestion.answer;
+            var something = RandomQuestion.answer;
+        // $http.get('http://localhost:8080/api/question/winOrTryQ',something ,localAnswer).then(function (response) {
+        //     $scope.winOrTry = response.data;
+        // });
+        if (localAnswer == RandomQuestion.answer)
+        {
+           $http.get('http://localhost:8080/api/question/winQ').then(function (response) {  //      it's doesn't work and i dom't know why
+               $scope.winOrTry = response.data;
+           });
+        } else {
+          $http.get('http://localhost:8080/api/question/tryQ').then(function (response) {
+              $scope.winOrTry = response.data;
+          });
+        }
+       }
 });
 
 // $scope.tryAnswer=function(response) {
@@ -113,3 +128,13 @@ $(function () {
     $( "#disconnect" ).click(function() { disconnect(); });
     $( "#send" ).click(function() { sendName(); });
 });
+
+
+//goooogle user
+function onSignIn(googleUser) {
+    var profile = googleUser.getBasicProfile();
+    $(".g-signin").css("display","none");
+    $(".data").css("display","block");
+    $("#pic").attr('scr',profile.getImageUrl());
+    $("#email").text(profile.getEmail());
+}

@@ -3,9 +3,11 @@ package Game.controller;
 import Game.entity.Question;
 import Game.service.Impl.QuestionServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import javax.xml.soap.SAAJResult;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,14 +35,25 @@ public class QuestionController {
         return questionServiceImpl.getAllQuestions();
     }
 
-    @GetMapping("/winQ")
+    @GetMapping(value = "/winQ",produces = MediaType.APPLICATION_JSON_VALUE)
     public String winQ() {
-        return ("You win game");
+        return ("u won");
     }
 
-    @GetMapping("/tryQ")
+    @GetMapping(value = "/tryQ",produces = MediaType.APPLICATION_JSON_VALUE)
     public String tryQ(){
         return ("Try one more time");
+    }
+
+    @GetMapping(value = "/wtf",produces = MediaType.APPLICATION_JSON_VALUE)
+    public String showAnswer(@RequestParam String answer){
+        return (answer);
+    }
+
+    @GetMapping(value = "/winOrTryQ",produces = MediaType.APPLICATION_JSON_VALUE)
+    public String showAnswer(@RequestBody int answer,int localAnswer){
+        if (answer == localAnswer) {return ("u won");}
+        else return ("Try more");
     }
 
 
