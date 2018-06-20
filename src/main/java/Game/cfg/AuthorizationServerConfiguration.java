@@ -29,6 +29,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
                 .resourceIds("oauth2-resource")
                 .accessTokenValiditySeconds(5000)
                 .secret("secret");
+
     }
 
     @Override
