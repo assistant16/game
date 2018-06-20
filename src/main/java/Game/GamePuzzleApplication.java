@@ -3,6 +3,7 @@ package Game;
 import Game.controller.UserController;
 import Game.entity.Question;
 import Game.entity.User;
+import Game.repository.UserRepository;
 import Game.service.Impl.QuestionServiceImpl;
 import Game.service.Impl.UserServiceImpl;
 import Game.convertor.Impl.UserConvertorImpl;
@@ -12,12 +13,15 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
 
 import javax.annotation.PostConstruct;
-import java.net.Authenticator;
 
-@EnableWebSecurity
+
+
 @SpringBootApplication
 
 public class GamePuzzleApplication {
@@ -27,6 +31,15 @@ public class GamePuzzleApplication {
 		SpringApplication.run(GamePuzzleApplication.class, args);
 	}
 
+//	@Autowired
+//	public void authenticationManager(AuthenticationManagerBuilder builder, UserRepository repository) throws Exception {
+//		builder.userDetailsService(new UserDetailsService() {
+//			@Override
+//			public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+//				return newrepository.findById(s);
+//			}
+//		});
+//	}
 	//@Component
 	//public class StartUpInit {
 	@Autowired
@@ -72,4 +85,6 @@ public class GamePuzzleApplication {
 	public ModelMapper modelMapper() {
 		return new ModelMapper();
 	}
+
+
 }

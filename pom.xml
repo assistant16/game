@@ -33,20 +33,6 @@
 
 
 	<dependencies>
-		<!--not now-->
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>
-
-		<!--///////////////////////////////////////////////////////////////////-->
-		<!--db-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -146,13 +132,37 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-websocket</artifactId>
 		</dependency>
-
-        <!--google service-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-oauth2</artifactId>
 		</dependency>
 
+        <!--google service + oauth-->
+
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.boot</groupId>-->
+            <!--<artifactId>spring-boot-starter-security</artifactId>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.security.oauth.boot</groupId>-->
+            <!--<artifactId>spring-security-oauth2-autoconfigure</artifactId>-->
+            <!--<version>2.0.1.RELEASE</version>-->
+        <!--</dependency>-->
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-oauth2-client</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-oauth2-jose</artifactId>
+		</dependency>
+
+		<!--because Google App Engine uses Jetty while default Spring Boot uses Tomcat-->
 
 	</dependencies>
 
@@ -161,7 +171,7 @@
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>
 				<artifactId>spring-cloud-dependencies</artifactId>
-				<version>${spring-cloud.version}</version>
+				<version>Camden.SR2</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
@@ -177,7 +187,19 @@
 		</plugins>
 	</build>
 
-
+	<repositories>
+		<repository>
+			<id>spring-snapshot</id>
+			<name>Spring Snapshot Repository</name>
+			<url>http://repo.spring.io/snapshot</url>
+		</repository>
+		<!--must work only with snapshot repository-->
+		<repository>
+			<id>spring-milestone</id>
+			<name>Spring Milestone Repository</name>
+			<url>http://repo.spring.io/milestone</url>
+		</repository>
+	</repositories>
 
 
 

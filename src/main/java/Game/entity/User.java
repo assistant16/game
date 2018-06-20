@@ -1,6 +1,7 @@
 package Game.entity;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -13,6 +14,8 @@ public class User {
     private String name;
     private String password;
     private String email;
+//    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+//    private List<Role> roles;
 
     public User(){}
 
