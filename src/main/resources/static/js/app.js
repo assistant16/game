@@ -1,25 +1,5 @@
-//goooogle user
-function onSignIn(googleUser) {
-    var profile = googleUser.getBasicProfile();
-    $(".g-signin2").css("display","none");
-    $(".data").css("dispay","block");
-    $("#pic").attr('src',profile.getImageUrl);
-    $("#email").text(profile.getEmail());
-    console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-    console.log('Name: ' + profile.getName());
-    console.log('Image URL: ' + profile.getImageUrl());
-    console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-}
-
-function signOut() {
-    var auth2 = gapi.auth2.getAuthInstance();
-    auth2.signOut().then(function () {
-        console.log('User signed out.');
-    });
-}
-
 var app = angular.module("app",[]);
-//
+
 // ws = new WebSocket('ws://localhost:8080/api');
 // ws.onmessage = function(data){};
 
@@ -47,7 +27,6 @@ app.controller('getQuestionController', function ($scope,$http) {
     $http.get('http://localhost:8080/api/question/viewQ').then(function (response) {
         $scope.QuestionTable = response.data;
     });
-    // }
 });
 
 app.controller('getRandomQuestionController', function ($scope,$http) {
@@ -63,7 +42,6 @@ app.controller('getRandomQuestionController', function ($scope,$http) {
 
     $scope.tryAnswer = function(RandomQuestion,localAnswer) {
             $scope.firstArgument = localAnswer;
-            $scope.secondArgument = RandomQuestion.answer;
             var something = RandomQuestion.answer;
         // $http.get('http://localhost:8080/api/question/winOrTryQ',something ,localAnswer).then(function (response) {
         //     $scope.winOrTry = response.data;
@@ -148,3 +126,22 @@ $(function () {
 });
 
 
+//goooogle user
+// function onSignIn(googleUser) {
+//     var profile = googleUser.getBasicProfile();
+//     $(".g-signin2").css("display","none");
+//     $(".data").css("dispay","block");
+//     $("#pic").attr('src',profile.getImageUrl);
+//     $("#email").text(profile.getEmail());
+//     console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+//     console.log('Name: ' + profile.getName());
+//     console.log('Image URL: ' + profile.getImageUrl());
+//     console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+// }
+//
+// function signOut() {
+//     var auth2 = gapi.auth2.getAuthInstance();
+//     auth2.signOut().then(function () {
+//         console.log('User signed out.');
+//     });
+// }

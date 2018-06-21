@@ -3,6 +3,7 @@ package Game.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ResolvableType;
+import org.springframework.http.MediaType;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
@@ -19,6 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
+@RequestMapping("/api/email")
 public class LoginController {
 
     @GetMapping("/user")
@@ -27,13 +29,13 @@ public class LoginController {
         return principal;
     }
 
-    @GetMapping("user/email")
-    public String showEmail(Principal principal){
-        OAuth2AuthenticationToken authentication = (OAuth2AuthenticationToken) principal;
-    Map<String,Object> details = authentication.getPrincipal().getAttributes();
-    String email = String.valueOf(details.get("email"));
-    return email;
-}
+//    @GetMapping(name = "/get",produces = MediaType.APPLICATION_JSON_VALUE)
+//    public String showEmail(){
+//        OAuth2AuthenticationToken authentication = (OAuth2AuthenticationToken) principal;
+//        Map<String,Object> details = authentication.getPrincipal().getAttributes();
+//        String email = String.valueOf(details.get("email"));
+//    return email;
+//}
 
 
     private static String authorizationRequestBaseUri

@@ -11,27 +11,14 @@
     <script type="text/javascript" src="js/app.js"></script>
     <!--<script src="/webjars/sockjs-client/sockjs.min.js"></script>-->
     <!--<script src="/webjars/stomp-websocket/stomp.min.js"></script>-->
-    <!--<style>-->
-        <!--.g-signin2{-->
-            <!--margin-left: 300px;-->
-            <!--margin-top: 20px;-->
-        <!--}-->
-        <!--/*.data{*/-->
-        <!--/*display: none ;*/-->
-        <!--/*}*/-->
-    <!--</style>-->
 </head>
 <body ng-controller="getRandomQuestionController">
 
-    <!--<div class="g-signin2" data-onsuccess="onSignIn"></div>-->
-
-    <div class="data">
-        <!--<p>Profile Details</p>-->
-        <!--<img id="pic" class="img-circle" width="96" height="96"/>-->
-        <p>Email adress</p>
-        <p id="email" class="alert alert-danger"></p>
-        <button onclick="signOut()" class="btn btn-danger">Sign out</button>
-    </div>
+<!--<div ng-controller="getEmailController" class="data" >-->
+    <!--<p id="email" class="alert alert-danger">Email address :</p>-->
+    <!--<p>{{email}}</p>-->
+    <!--<button onclick="signOut()" class="btn btn-danger">Sign out</button>-->
+<!--</div>-->
 
 <div>
     <div class="form-group">
@@ -47,8 +34,7 @@
                     <div class="panel-heading">Random question</div>
                     <table class="table ">
                         <tbody ng-model="RandomQuestion">
-                        <td>{{RandomQuestion.question}}</td>
-                        <td>{{RandomQuestion.answer}}</td>
+                        <td>{{RandomQuestion.questionName}}</td>
                         </tbody>
                     </table>
                 </div>
@@ -71,7 +57,6 @@
         <br>first argument {{firstArgument}}</br>
         <br>second argument {{secondArgument}}</br>
         <br>result {{winOrTry}}</br>
-        <!--<br>resultNew {{winOrTry2}}</br>-->
     </div>
 </div>
 </body>

@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,15 +20,23 @@ public class ScoreController {
 
     private ScoreConvertor scoreConvertor;
 
+    private LoginController loginController;
+
     @PostMapping(name = "/addingScore")
     @ResponseStatus(HttpStatus.CREATED)
     public ScoreDto addUser(@RequestBody ScoreDto scoreDto) {
         Score score = scoreServiceImpl.addScore(scoreConvertor.toScore(scoreDto));
         return scoreConvertor.toDto(score);
     }
+//    @PostMapping(name = "/addingScore")
+//    @ResponseStatus(HttpStatus.CREATED)
+//    public Score addUser2() {
+//        Score score = new Score(15,loginController.showEmail());
+//        return scoreServiceImpl.addScore(score);
+//    }
 
     @GetMapping(name = "/viewAllScore",produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Score> getAllUsers(){
+    public List<Score> getAllScore(){
         return scoreServiceImpl.getAllScore();
     }
 

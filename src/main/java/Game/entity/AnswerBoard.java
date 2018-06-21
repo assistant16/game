@@ -6,14 +6,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class CurrentQuestion {
+public class AnswerBoard {
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
-    private String currentQuestionName;
+    private String email;
     private int currentAnswer;
 
-    CurrentQuestion(){}
+    AnswerBoard(){}
 
     public Long getId() {
         return id;
@@ -23,12 +24,12 @@ public class CurrentQuestion {
         this.id = id;
     }
 
-    public String getCurrentQuestionName() {
-        return currentQuestionName;
+    public String getEmail() {
+        return email;
     }
 
-    public void setCurrentQuestionName(String currentQuestionName) {
-        this.currentQuestionName = currentQuestionName;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public int getCurrentAnswer() {
@@ -41,9 +42,9 @@ public class CurrentQuestion {
 
     @Override
     public String toString() {
-        return "CurrentQuestion{" +
+        return "AnswerBoard{" +
                 "id=" + id +
-                ", currentQuestionName='" + currentQuestionName + '\'' +
+                ", email='" + email + '\'' +
                 ", currentAnswer=" + currentAnswer +
                 '}';
     }
