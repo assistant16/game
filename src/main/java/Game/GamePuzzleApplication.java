@@ -7,7 +7,6 @@ import Game.repository.UserRepository;
 import Game.service.Impl.QuestionServiceImpl;
 import Game.service.Impl.UserServiceImpl;
 import Game.convertor.Impl.UserConvertorImpl;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -77,10 +76,6 @@ public class GamePuzzleApplication {
 //			userController.addUser2(new User("vasya","vasya","vasya"));
 //	};
 //}
-	@Bean
-	public ModelMapper modelMapper() {
-		return new ModelMapper();
-	}
 
 
 }
