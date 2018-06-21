@@ -8,6 +8,59 @@ var app = angular.module("app",[]);
 //         $scope.UserTable = response.data;
 //     });
 // });
+app.controller('getEmail',function ($scope, $http) {
+    $scope.something1 = "wtf";
+    $scope.something2 = "da";
+    $http.get('http://localhost:8080/api/email/get',principal).then(function (response) {
+        $scope.someEmail = response.data;
+        $scope.something1 = "wtf";
+        $scope.something2 = "da";
+    });
+});
+
+
+
+app.controller('getRandomQuestionController', function ($scope,$http) {
+
+    $scope.RandomQuestion="";
+
+    $scope.getRandomQuestion = function () {
+        $http.get('http://localhost:8080/api/question/RandomQ').then(function (response) {
+
+            $scope.RandomQuestion = response.data;
+        });
+    };
+
+    $scope.getEmail = function () {
+        var url = 'http://localhost:8080/api/email/get';
+
+        $http.get(url).then(function (response) {
+            $scope.someEmail = response.data;
+            $scope.something1 = "wtf";
+            $scope.something2 = "da";
+        });
+    };
+
+
+    $scope.tryAnswer = function(RandomQuestion,localAnswer) {
+        $scope.firstArgument = localAnswer;
+        // $http.get('http://localhost:8080/api/question/winOrTryQ',something ,localAnswer).then(function (response) {
+        //     $scope.winOrTry = response.data;
+        // });
+        // if (localAnswer == RandomQuestion.answer)
+        // {
+        //     $http.get('http://localhost:8080/api/question/winQ').then(function (response) {  //      it's doesn't work and i dom't know why
+        //         $scope.winOrTry = response.data;
+        //     });
+        // } else {
+        //     $http.get('http://localhost:8080/api/question/tryQ').then(function (response) {
+        //         $scope.winOrTry = response.data;
+        //     });
+        // }
+    };
+});
+
+
 app.controller('postUserController', function($scope, $http) {
     $scope.submitForm = function(item) {
 
@@ -29,35 +82,7 @@ app.controller('getQuestionController', function ($scope,$http) {
     });
 });
 
-app.controller('getRandomQuestionController', function ($scope,$http) {
 
-    $scope.RandomQuestion="";
-
-    $scope.getRandomQuestion = function () {
-        $http.get('http://localhost:8080/api/question/RandomQ').then(function (response) {
-
-            $scope.RandomQuestion = response.data;
-        });
-    };
-
-    $scope.tryAnswer = function(RandomQuestion,localAnswer) {
-            $scope.firstArgument = localAnswer;
-            var something = RandomQuestion.answer;
-        // $http.get('http://localhost:8080/api/question/winOrTryQ',something ,localAnswer).then(function (response) {
-        //     $scope.winOrTry = response.data;
-        // });
-        if (localAnswer == RandomQuestion.answer)
-        {
-           $http.get('http://localhost:8080/api/question/winQ').then(function (response) {  //      it's doesn't work and i dom't know why
-               $scope.winOrTry = response.data;
-           });
-        } else {
-          $http.get('http://localhost:8080/api/question/tryQ').then(function (response) {
-              $scope.winOrTry = response.data;
-          });
-        }
-       }
-});
 
 // $scope.tryAnswer=function(response) {
 //

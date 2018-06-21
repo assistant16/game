@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="app" xmlns="http://www.w3.org/1999/html">
+<html lang="en" ng-app="app">
 <head>
     <title>mainPageTitle</title>
     <meta charset="UTF-8" name="google-signin-client_id"
@@ -12,15 +12,18 @@
     <!--<script src="/webjars/sockjs-client/sockjs.min.js"></script>-->
     <!--<script src="/webjars/stomp-websocket/stomp.min.js"></script>-->
 </head>
-<body ng-controller="getRandomQuestionController">
+<body >
 
-<!--<div ng-controller="getEmailController" class="data" >-->
+<div class="email" ng-controller="getEmail" >
     <!--<p id="email" class="alert alert-danger">Email address :</p>-->
-    <!--<p>{{email}}</p>-->
-    <!--<button onclick="signOut()" class="btn btn-danger">Sign out</button>-->
-<!--</div>-->
+    <br>some Email {{someEmail}}</br>
+    <br>some 1 {{something1}}</br>
+    <br>some 2 {{something2}}</br>
 
-<div>
+    <!--<button onclick="signOut()" class="btn btn-danger">Sign out</button>-->
+</div>
+
+<div ng-controller="getRandomQuestionController">
     <div class="form-group">
         <div class="col-sm-offset-1 col-sm-5">
             <button type="button" class="btn btn-random" ng-click="getRandomQuestion()">Random question</button>
