@@ -13,7 +13,6 @@ public class QuestionConvertorImpl implements QuestionConvertor{
     public QuestionDto toDtoQ(Question question) {
         QuestionDto questionDto = new QuestionDto();
         questionDto.setId(question.getId());
-        questionDto.setAnswer(question.getAnswer());
         questionDto.setQuestion(question.getQuestion());
         return questionDto;
     }
@@ -22,7 +21,6 @@ public class QuestionConvertorImpl implements QuestionConvertor{
     @Override
     public Question toQuestion(QuestionDto questionDto) {
         Question question = new Question();
-        question.setAnswer(questionDto.getAnswer());
         question.setQuestion(questionDto.getQuestion());
         return question;
     }

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="utf-8">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script type="text/javascript" src="js/angular.min.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+</head>
+<body ng-app="Demo">
+<h3>Login with:</h3>
+    <p th:each="url : ${urls}">
+        <a th:text="${url.key}" th:href="${url.value}">Client</a>
+    </p>
+
+</body>
+</html>

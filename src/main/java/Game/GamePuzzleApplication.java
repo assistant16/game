@@ -12,10 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 
 import javax.annotation.PostConstruct;
@@ -58,17 +54,17 @@ public class GamePuzzleApplication {
 		public void init() {
 
 			//UserController userController = new UserController();
-			questionServiceImpl.addQuestion(new Question("what's wrong?",404));
-			questionServiceImpl.addQuestion(new Question("what's else?",909));
-			questionServiceImpl.addQuestion(new Question("how r u?",49));
-
-			userServiceImpl.addUser(new User( "user1", "user1", "user1"));
-			userServiceImpl.addUser(new User( "user2", "user2", "user2"));
-			userServiceImpl.addUser(new User( "user3", "user3", "user3"));
-
-
-			User userP = new User("petya","petya","petya");
-			userController.addUser2(userP);
+//			questionServiceImpl.addQuestion(new Question("what's wrong?",404));
+//			questionServiceImpl.addQuestion(new Question("what's else?",909));
+//			questionServiceImpl.addQuestion(new Question("how r u?",49));
+//
+//			userServiceImpl.addUser(new User( "user1", "user1", "user1"));
+//			userServiceImpl.addUser(new User( "user2", "user2", "user2"));
+//			userServiceImpl.addUser(new User( "user3", "user3", "user3"));
+//
+//
+//			User userP = new User("petya","petya","petya");
+//			userController.addUser2(userP);
 			//userConvertorImpl.toDto(userP);
 			//
 			//userServiceImpl.getAllUsers();

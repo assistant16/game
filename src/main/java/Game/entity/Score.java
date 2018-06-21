@@ -1,5 +1,6 @@
 package Game.entity;
 
+import javax.management.StandardEmitterMBean;
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -11,18 +12,7 @@ public class Score {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private int numberScore;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id",referencedColumnName = "id")
-    private User user;
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
+    private String email;
 
     public Long getId() {
         return id;
@@ -40,19 +30,28 @@ public class Score {
         this.numberScore = numberScore;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Score score = (Score) o;
-        return id == score.id &&
-                numberScore == score.numberScore;
+        return numberScore == score.numberScore &&
+                Objects.equals(id, score.id) &&
+                Objects.equals(email, score.email);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, numberScore);
+        return Objects.hash(id, numberScore, email);
     }
 
     @Override
@@ -60,6 +59,7 @@ public class Score {
         return "Score{" +
                 "id=" + id +
                 ", numberScore=" + numberScore +
+                ", email='" + email + '\'' +
                 '}';
     }
 }

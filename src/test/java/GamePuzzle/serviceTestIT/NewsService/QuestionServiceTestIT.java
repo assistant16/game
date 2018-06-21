@@ -52,7 +52,6 @@ public class QuestionServiceTestIT extends BaseServiceTest {
 
         assertThat(savedQuestion.getId()).isNotNull();
         assertThat(savedQuestion.getQuestion()).isEqualTo("test1");
-        assertThat(savedQuestion.getAnswer()).isEqualTo(1);
     }
 }
 
