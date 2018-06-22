@@ -8,16 +8,17 @@ public class ScoreConvertorImpl implements ScoreConvertor {
     @Override
     public ScoreDto toDto(Score score) {
        ScoreDto scoreDto = new ScoreDto();
-       scoreDto.setId(score.getId());
-       scoreDto.setNumberScore(score.getNumberScore());
+       scoreDto.setName(score.getEmail());
+       scoreDto.setScore(String.valueOf(score.getNumberScore()));
+
        return scoreDto;
     }
 
     @Override
     public Score toScore(ScoreDto scoreDto) {
         Score score = new Score();
-        score.setId(scoreDto.getId());
-        score.setNumberScore(scoreDto.getNumberScore());
+        score.setNumberScore(Integer.parseInt(scoreDto.getScore()));
+        score.setEmail(scoreDto.getName());
         return score;
     }
 }

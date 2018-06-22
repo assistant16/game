@@ -8,7 +8,7 @@
 //import javax.sql.DataSource;
 //
 //@Configuration
-//public class DatabaseConfig {
+//public class DatabaseConfiguration {
 //    @Bean
 //    @Primary
 //    @ConfigurationProperties(prefix = "spring.datasource")

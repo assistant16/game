@@ -8,20 +8,18 @@ import javax.persistence.Id;
 @Entity
 public class CurrentQuestion {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
     private String currentQuestionName;
     private int currentAnswer;
+    private boolean solved = false;
 
-    CurrentQuestion(){}
-
-    public Long getId() {
-        return id;
+    public boolean isSolved() {
+        return solved;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setSolved(boolean solved) {
+        this.solved = solved;
     }
+
 
     public String getCurrentQuestionName() {
         return currentQuestionName;
@@ -42,7 +40,6 @@ public class CurrentQuestion {
     @Override
     public String toString() {
         return "CurrentQuestion{" +
-                "id=" + id +
                 ", currentQuestionName='" + currentQuestionName + '\'' +
                 ", currentAnswer=" + currentAnswer +
                 '}';

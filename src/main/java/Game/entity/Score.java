@@ -9,18 +9,8 @@ import java.util.Objects;
 public class Score {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
-    private int numberScore;
     private String email;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+    private int numberScore;
 
     public int getNumberScore() {
         return numberScore;
@@ -44,20 +34,19 @@ public class Score {
         if (o == null || getClass() != o.getClass()) return false;
         Score score = (Score) o;
         return numberScore == score.numberScore &&
-                Objects.equals(id, score.id) &&
+
                 Objects.equals(email, score.email);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, numberScore, email);
+        return Objects.hash( numberScore, email);
     }
 
     @Override
     public String toString() {
         return "Score{" +
-                "id=" + id +
                 ", numberScore=" + numberScore +
                 ", email='" + email + '\'' +
                 '}';

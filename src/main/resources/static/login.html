@@ -1,32 +1,28 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html >
+<html ng-app="app">
 <head>
-    <title>Sign in</title>
-    <meta name="google-signin-client_id"
+    <title>mainPageTitle</title>
+    <meta charset="UTF-8" name="google-signin-client_id"
           content="462600627406-dktknb555dpuoirof9378mnv35ouod1d.apps.googleusercontent.com">
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <script type="text/javascript" src="js/angular.min.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
-    <style>
-        .g-signin2{
-            margin-left: 300px;
-            margin-top: 200px;
-        }
-        /*.data{*/
-            /*display: none ;*/
-        /*}*/
-    </style>
 </head>
-<body>
-    <div class="g-signin2" data-onsuccess="onSignIn"></div>
-    <div class="data">
-        <p>Profile Details</p>
-        <img id="pic" class="img-circle" width="96" height="96"/>
-        <p>Email adress</p>
-        <p id="email" class="alert alert-danger"></p>
-        <button onclick="signOut()" class="btn btn-danger">Sign out</button>
-    </div>
+<body ng-controller="mainController">
+    <br>
+        <br>Current question : {{user.currentQuestion}}</br>
+        <br>systemResponse : {{user.systemResponse}}</br>
+        <br>bestVariant : {{user.bestVariant}}</br>
+        <div ng-repeat="item in user">
+            <br>{{item.history.email}}</br>
+            <br>{{item.history.currentAnswer}}</br>
+        </div>
+        <br>bestVariantOwner : {{user.bestVariantOwner}}</br>
+        <div ng-repeat="item2 in user">
+            <br>{{item.top.email}}</br>
+            <br>{{item.top.numberScore}}</br>
+        </div>
 </body>
 </html>

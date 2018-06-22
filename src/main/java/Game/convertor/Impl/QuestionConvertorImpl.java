@@ -12,7 +12,6 @@ public class QuestionConvertorImpl implements QuestionConvertor{
     @Override
     public QuestionDto toDtoQ(Question question) {
         QuestionDto questionDto = new QuestionDto();
-        questionDto.setId(question.getId());
         questionDto.setQuestion(question.getQuestion());
         return questionDto;
     }

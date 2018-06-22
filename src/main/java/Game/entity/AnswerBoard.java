@@ -14,7 +14,12 @@ public class AnswerBoard {
     private String email;
     private int currentAnswer;
 
-    AnswerBoard(){}
+    public AnswerBoard(){}
+
+    public AnswerBoard(String email, int currentAnswer) {
+        this.email = email;
+        this.currentAnswer = currentAnswer;
+    }
 
     public Long getId() {
         return id;

@@ -1,22 +1,31 @@
 package Game.dto;
 
 public class ScoreDto {
-    private Long id;
-    private int numberScore;
+    private String name;
+    private String score;
+    private String position;
 
-    public Long getId() {
-        return id;
+    public String getName() {
+        return name;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public int getNumberScore() {
-        return numberScore;
+    public String getScore() {
+        return score;
     }
 
-    public void setNumberScore(int numberScore) {
-        this.numberScore = numberScore;
+    public void setScore(String score) {
+        this.score = score;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
     }
 }
