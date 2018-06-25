@@ -7,13 +7,13 @@ var app = angular.module("app",[]);
 
 app.controller('mainController',function ($scope,$http) {
     $scope.guess = function (variant) {
-        $http.get('http://localhost:8080/app/try?variant=' + variant).then(function (response) {
+        $http.get('app/try?variant=' + variant).then(function (response) {
             $scope.page = response.data;
         });
     };
 
     $scope.getPage=function(){
-        $http.get('http://localhost:8080/app/show').then(function (response) {
+        $http.get('app/show').then(function (response) {
             $scope.page = response.data;
         });
     }
