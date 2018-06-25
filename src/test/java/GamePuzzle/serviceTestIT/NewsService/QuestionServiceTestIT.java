@@ -43,8 +43,8 @@ public class QuestionServiceTestIT extends BaseServiceTest {
 
     @Test
     public void addQuestionTest() {
-        Question question1 = new Question("test1", 1);
-        Question question2 = new Question("test2", 2);
+        Question question1 = new Question("test1");
+        Question question2 = new Question("test2");
         questionServiceImpl.addQuestion(question1);
         questionServiceImpl.addQuestion(question2);
 

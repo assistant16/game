@@ -3,11 +3,34 @@ var app = angular.module("app",[]);
 // ws = new WebSocket('ws://localhost:8080/api');
 // ws.onmessage = function(data){};
 
+//one
+
 app.controller('mainController',function ($scope,$http) {
-    $http.post('http://localhost:8080/app/try').then(function (response) {
-        $scope.information = response.data;
-    });
+    $scope.guess = function (variant) {
+        $http.get('http://localhost:8080/app/try?variant=' + variant).then(function (response) {
+            $scope.page = response.data;
+        });
+    };
+
+    $scope.getPage=function(){
+        $http.get('http://localhost:8080/app/show').then(function (response) {
+            $scope.page = response.data;
+        });
+    }
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 app.controller('getEmail',function ($scope, $http) {

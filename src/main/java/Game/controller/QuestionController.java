@@ -20,7 +20,7 @@ public class QuestionController {
 
     @RequestMapping("/addQ")
     public String addQ(@RequestParam String questionName, @RequestParam int answer) {
-        questionServiceImpl.addQuestion(new Question(questionName,answer));
+        questionServiceImpl.addQuestion(new Question(questionName));
         return ("added");
     }
 

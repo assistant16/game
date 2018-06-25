@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="en" ng-app="app">
+<!DOCTYPE html >
+<html>
 <head>
     <title>mainPageTitle</title>
     <meta charset="UTF-8" name="google-signin-client_id"
@@ -9,58 +9,25 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <script type="text/javascript" src="js/angular.min.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
-    <!--<script src="/webjars/sockjs-client/sockjs.min.js"></script>-->
-    <!--<script src="/webjars/stomp-websocket/stomp.min.js"></script>-->
 </head>
-<body >
+<body  ng-app="app" ng-controller="mainController">
+<br>
+<button type="button" class="btn btn" ng-click="getPage()">GetPage</button>
+<input type="text" class="form-control" name="variant" id="variantId"
+       placeholder="Enter variant" ng-model="variant"/>
+<button type="button" class="btn btn" ng-click="guess(variant)">Guess</button>
 
-<div class="email" ng-controller="getEmail">
-    <!--<p id="email" class="alert alert-danger">Email address :</p>-->
-    <br>some Email {{user.principal.attributes.email}} </br>
-    <br>some 1 {{something1}}</br>
-    <br>some 2 {{something2}}</br>
+<br>Current question : {{page.currentQuestion}}</br>
+<br>systemResponse : {{page.systemResponse}}</br>
+<br>bestVariant : {{page.bestVariant}} owner : {{page.bestVariantOwner}}</br>
+<br>Скоры : </br>
+<ul>
+    <li ng-repeat="item in page">{{item.history.AnswerBoard.email + " " + item.history.AnswerBoard.currentAnswer}}</li>
+</ul>
+<br>Top : </br>
+<ul>
+    <li ng-repeat="item2 in page">{{item2.top}}</li>
+</ul>
 
-    <!--<button onclick="signOut()" class="btn btn-danger">Sign out</button>-->
-</div>
-
-<div ng-controller="getRandomQuestionController">
-    <div class="form-group">
-        <div class="col-sm-offset-1 col-sm-5">
-            <button type="button" class="btn btn-random" ng-click="getRandomQuestion()">Random question</button>
-        </div>
-    </div>
-
-    <div class="container" style="margin-top: 30px">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Random question</div>
-                    <table class="table ">
-                        <tbody ng-model="RandomQuestion">
-                        <td>{{RandomQuestion.questionName}}</td>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <form class="form-horizontal" style="margin-top: 30px" name="AnswerForm" >
-        <div class="form-group">
-            <label class="control-label col-sm-2" for="answerID">Answer:</label>
-            <div class="col-sm-5">
-                <input type="text" class="form-control" name="answer" id="answerID"
-                       placeholder="Enter answer" ng-model="localAnswer"/>
-                <button type="submit" class="btn btn-try" ng-click="tryAnswer(RandomQuestion,localAnswer)">Try answer</button>
-            </div>
-        </div>
-    </form>
-
-    <div class="something" style="margin-left: 30px">
-        <br>first argument {{firstArgument}}</br>
-        <br>second argument {{secondArgument}}</br>
-        <br>result {{winOrTry}}</br>
-    </div>
-</div>
 </body>
 </html>

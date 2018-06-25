@@ -6,5 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AnswerBoardRepository extends JpaRepository<AnswerBoard,Long> {
-    AnswerBoard findLastById();
+    AnswerBoard findLastBy();
+    AnswerBoard findTop1ByOrderByIdDesc();
 }

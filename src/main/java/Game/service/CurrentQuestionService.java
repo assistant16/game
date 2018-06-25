@@ -9,5 +9,6 @@ import java.util.List;
 @Service
 @Transactional
 public interface CurrentQuestionService {
+    CurrentQuestion addCurrentQuestion(CurrentQuestion question);
     List<CurrentQuestion> getAllCurrentQuestions();
 }

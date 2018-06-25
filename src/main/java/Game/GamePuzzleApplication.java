@@ -1,9 +1,12 @@
 package Game;
 
 import Game.controller.UserController;
+import Game.entity.CurrentQuestion;
 import Game.entity.Question;
 import Game.entity.User;
 import Game.repository.UserRepository;
+import Game.service.Impl.CurrentQuestionServiceImpl;
+import Game.service.Impl.MainServiceImpl;
 import Game.service.Impl.QuestionServiceImpl;
 import Game.service.Impl.UserServiceImpl;
 import Game.convertor.Impl.UserConvertorImpl;
@@ -48,25 +51,23 @@ public class GamePuzzleApplication {
 	@Autowired
 	QuestionServiceImpl questionServiceImpl;
 
+	@Autowired
+	MainServiceImpl mainServiceImpl;
+
+//	@Autowired
+//	CurrentQuestionServiceImpl currentQuestionService;
+
 
 		@PostConstruct   //need to add at entity
 		public void init() {
 
 			//UserController userController = new UserController();
-			questionServiceImpl.addQuestion(new Question("what's wrong?",404));
-			questionServiceImpl.addQuestion(new Question("what's else?",909));
-			questionServiceImpl.addQuestion(new Question("how r u?",49));
+			questionServiceImpl.addQuestion(new Question("what's wrong?"));
+			questionServiceImpl.addQuestion(new Question("what's else?"));
+			questionServiceImpl.addQuestion(new Question("how r u?"));
 
-//			userServiceImpl.addUser(new User( "user1", "user1", "user1"));
-//			userServiceImpl.addUser(new User( "user2", "user2", "user2"));
-//			userServiceImpl.addUser(new User( "user3", "user3", "user3"));
-//
-//
-//			User userP = new User("petya","petya","petya");
-//			userController.addUser2(userP);
-//			userConvertorImpl.toDto(userP);
-//
-//			userServiceImpl.getAllUsers();
+			//currentQuestionService.addCurrentQuestion(new CurrentQuestion("what's wrong"));
+			mainServiceImpl.begin();
 
 		}
 //

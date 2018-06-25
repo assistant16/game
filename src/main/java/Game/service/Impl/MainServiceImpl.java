@@ -4,6 +4,7 @@ import Game.dto.PageDto;
 import Game.dto.ScoreDto;
 import Game.entity.AnswerBoard;
 import Game.entity.CurrentQuestion;
+import Game.entity.Question;
 import Game.entity.Score;
 import Game.repository.AnswerBoardRepository;
 import Game.repository.CurrentQuestionRepository;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 @Service
@@ -33,60 +35,79 @@ public class MainServiceImpl implements MainService {
     @Autowired
     QuestionRepository questionRepository;
 
-    MainServiceImpl mainService;
 
 
     @Override
     public PageDto guess(int variant,String email) {
-        mainService.getPage();
+        this.getPage();
         String systemResponse;
-        AnswerBoard bestVariant = answerBoardRepository.findLastById();
-        CurrentQuestion currentQuestion = currentQuestionRepository.findFirstById();
-        int bestNumber = bestVariant.getCurrentAnswer();
+        AnswerBoard bestVariant = answerBoardRepository.findTop1ByOrderByIdDesc();
+        //AnswerBoard bestVariant = answerBoardRepository.findLastBy();
+        CurrentQuestion currentQuestion = currentQuestionRepository.findFirstBy();
+
+        int bestNumber;
+        if (bestVariant != null) { bestNumber = bestVariant.getCurrentAnswer();
+        } else { bestNumber = variant;
+        }
         int answer = currentQuestion.getCurrentAnswer();
 
 
-        Score sessionScore = scoreRepository.findByName(email);
 
 
         if(variant == answer){
             systemResponse = "win";
             //w somethind datatime
-            final Random random = new Random();
-            String newQuestion = questionRepository.findRandom().getQuestion();
+            Random random = new Random();
+            Question question = questionRepository.findFirstBy();             //need random
+            String newQuestion = question.getQuestion();
            // String newQuestion = questionRepository.findById(1L);
 
             currentQuestion.setSolved(true);
+            Score sessionScoreCheck = scoreRepository.findByEmail(email);
+
+            if(sessionScoreCheck == null ) {
+                Score score = new Score();
+                score.setEmail(email);
+                score.setNumberScore(0);
+                scoreRepository.save(score);
+            }
+            Score sessionScore = scoreRepository.findByEmail(email);
 
             sessionScore.setNumberScore(sessionScore.getNumberScore()+1);
+            scoreRepository.save(sessionScore);
 
-            currentQuestionRepository.deleteAll();
+           // currentQuestionRepository.deleteAll();
+            currentQuestionRepository.delete(currentQuestionRepository.findFirstBy());
 
             answerBoardRepository.deleteAll();
-            answerBoardRepository.save(new AnswerBoard(email,answer));
+            AnswerBoard answerBoard = new AnswerBoard();
+            answerBoard.setEmail(email);
+            answerBoard.setCurrentAnswer(answer);
+            answerBoardRepository.save(answerBoard);
 
             CurrentQuestion newQuestionForSave = new CurrentQuestion();
             newQuestionForSave.setCurrentQuestionName(newQuestion);
-            newQuestionForSave.setCurrentAnswer(random.nextInt(3));
+            newQuestionForSave.setCurrentAnswer(random.nextInt(10));
             newQuestionForSave.setSolved(false);
             currentQuestionRepository.save(newQuestionForSave);
+            bestNumber = variant;
 
         } else {
-            if (Math.abs(variant - answer) < Math.abs(bestNumber - answer)) {
+            if (Math.abs(variant - answer) <= Math.abs(bestNumber - answer)) {
                 AnswerBoard newAnswerBoard = new AnswerBoard();
+                bestNumber = variant;
                 newAnswerBoard.setCurrentAnswer(variant);
                 newAnswerBoard.setEmail(email);
                 answerBoardRepository.save(newAnswerBoard);
-                systemResponse = "yes";
+                systemResponse = "It's better";
             } else {
-                systemResponse = "no";
+                systemResponse = "It's worse";
             }
         }
 
-
         PageDto pageDto = new PageDto();
         pageDto.setSystemResponse(systemResponse);
-        pageDto.setCurrentQuestion(currentQuestion.getCurrentQuestionName());
+        pageDto.setCurrentQuestion(currentQuestionRepository.findFirstBy().getCurrentQuestionName());//currentQuestion.getCurrentQuestionName());
         pageDto.setBestVariantOwner(email);
         pageDto.setBestVariant(String.valueOf(bestNumber));
         pageDto.setHistory(answerBoardRepository.findAll());
@@ -98,16 +119,32 @@ public class MainServiceImpl implements MainService {
 
     @Override
     public PageDto getPage() {
-        CurrentQuestion currentQuestion = currentQuestionRepository.findFirstById();
-        if(!currentQuestion.isSolved())
-        {
-            List<AnswerBoard> allVariants = answerBoardRepository.findAll();
-        }
+        CurrentQuestion currentQuestion = currentQuestionRepository.findFirstBy();
+
         PageDto pageDto = new PageDto();
         pageDto.setCurrentQuestion(currentQuestion.getCurrentQuestionName());
-        pageDto.setHistory(answerBoardRepository.findAll());
         pageDto.setTop(scoreRepository.findAll());
-
+        if(currentQuestion.isSolved())
+        {
+            pageDto.setHistory(answerBoardRepository.findAll());
+        }
         return pageDto;
+    }
+
+    @Override
+    public void begin() {
+
+        CurrentQuestion forCheck = currentQuestionRepository.findFirstBy();
+        Question firstBy = questionRepository.findFirstBy();   //need random
+
+        if (forCheck == null || (!forCheck.isSolved())) {
+             CurrentQuestion currentQuestion = new CurrentQuestion();
+
+            currentQuestion.setCurrentQuestionName(firstBy.getQuestion());
+            Random random = new Random();
+            currentQuestion.setCurrentAnswer(random.nextInt(100));
+            currentQuestion.setSolved(false);
+            currentQuestionRepository.save(currentQuestion);
+        }
     }
 }

@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CurrentQuestionRepository extends JpaRepository<CurrentQuestion,Long> {
-    CurrentQuestion findFirstById();
+    CurrentQuestion findFirstBy();
 }

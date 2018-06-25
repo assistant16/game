@@ -12,6 +12,12 @@ public class CurrentQuestionServiceImpl implements CurrentQuestionService{
     @Autowired
     private CurrentQuestionRepository currentQuestionRepository;
 
+
+    @Override
+    public CurrentQuestion addCurrentQuestion(CurrentQuestion question) {
+        return currentQuestionRepository.save(question);
+    }
+
     @Override
     public List<CurrentQuestion> getAllCurrentQuestions() {
         return currentQuestionRepository.findAll();

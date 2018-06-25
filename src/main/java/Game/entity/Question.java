@@ -10,7 +10,7 @@ public class Question {
 
     public Question(){}
 
-    public Question(String questionName, int answer) {
+    public Question(String questionName) {
         this.questionName = questionName;
     }
 
