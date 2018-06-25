@@ -16,7 +16,9 @@ app.controller('mainController',function ($scope,$http) {
         $http.get('app/show').then(function (response) {
             $scope.page = response.data;
         });
-    }
+    };
+
+    // getPage();
 });
 
 

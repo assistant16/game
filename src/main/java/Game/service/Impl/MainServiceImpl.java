@@ -12,9 +12,11 @@ import Game.repository.QuestionRepository;
 import Game.repository.ScoreRepository;
 import Game.service.MainService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.Id;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
@@ -40,9 +42,10 @@ public class MainServiceImpl implements MainService {
     @Override
     public PageDto guess(int variant,String email) {
         this.getPage();
+        PageDto pageDto = new PageDto();
+
         String systemResponse;
         AnswerBoard bestVariant = answerBoardRepository.findTop1ByOrderByIdDesc();
-        //AnswerBoard bestVariant = answerBoardRepository.findLastBy();
         CurrentQuestion currentQuestion = currentQuestionRepository.findFirstBy();
 
         int bestNumber;
@@ -60,7 +63,6 @@ public class MainServiceImpl implements MainService {
             Random random = new Random();
             Question question = questionRepository.findFirstBy();             //need random
             String newQuestion = question.getQuestion();
-           // String newQuestion = questionRepository.findById(1L);
 
             currentQuestion.setSolved(true);
             Score sessionScoreCheck = scoreRepository.findByEmail(email);
@@ -75,19 +77,13 @@ public class MainServiceImpl implements MainService {
 
             sessionScore.setNumberScore(sessionScore.getNumberScore()+1);
             scoreRepository.save(sessionScore);
-
-           // currentQuestionRepository.deleteAll();
             currentQuestionRepository.delete(currentQuestionRepository.findFirstBy());
-
             answerBoardRepository.deleteAll();
-            AnswerBoard answerBoard = new AnswerBoard();
-            answerBoard.setEmail(email);
-            answerBoard.setCurrentAnswer(answer);
-            answerBoardRepository.save(answerBoard);
-
+            pageDto.setBestVariant(String.valueOf(variant));
+            pageDto.setBestVariantOwner(email);
             CurrentQuestion newQuestionForSave = new CurrentQuestion();
             newQuestionForSave.setCurrentQuestionName(newQuestion);
-            newQuestionForSave.setCurrentAnswer(random.nextInt(10));
+            newQuestionForSave.setCurrentAnswer(random.nextInt(100));
             newQuestionForSave.setSolved(false);
             currentQuestionRepository.save(newQuestionForSave);
             bestNumber = variant;
@@ -95,26 +91,47 @@ public class MainServiceImpl implements MainService {
         } else {
             if (Math.abs(variant - answer) <= Math.abs(bestNumber - answer)) {
                 AnswerBoard newAnswerBoard = new AnswerBoard();
-                bestNumber = variant;
+                bestNumber=variant;
+
                 newAnswerBoard.setCurrentAnswer(variant);
                 newAnswerBoard.setEmail(email);
+
+
                 answerBoardRepository.save(newAnswerBoard);
+
                 systemResponse = "It's better";
             } else {
                 systemResponse = "It's worse";
             }
         }
 
-        PageDto pageDto = new PageDto();
+
+        CheckAnswerBoard(pageDto);
         pageDto.setSystemResponse(systemResponse);
         pageDto.setCurrentQuestion(currentQuestionRepository.findFirstBy().getCurrentQuestionName());//currentQuestion.getCurrentQuestionName());
-        pageDto.setBestVariantOwner(email);
-        pageDto.setBestVariant(String.valueOf(bestNumber));
-        pageDto.setHistory(answerBoardRepository.findAll());
+
         pageDto.setTop(scoreRepository.findAll());
 
         return pageDto;
 
+    }
+
+    public  PageDto CheckAnswerBoard(PageDto pageDto){
+        public Iterable<PageDto> findAll(
+                @Spec(path = "firstName", spec = Like.class) Specification<Customer> spec) {
+
+            return customerRepo.findAll(spec);
+        }
+
+        if(answerBoardRepository.findTop1ByOrderByIdDesc()!= null){
+            pageDto.setBestVariant(String.valueOf(answerBoardRepository.findTop1ByOrderByIdDesc().getCurrentAnswer()));
+            pageDto.setBestVariantOwner(String.valueOf(answerBoardRepository.findTop1ByOrderByIdDesc().getEmail()));
+            AnswerBoard answerBoard = answerBoardRepository.findTop1ByOrderByIdDesc();
+            answerBoardRepository.delete(answerBoardRepository.findTop1ByOrderByIdDesc());
+            pageDto.setHistory(answerBoardRepository.findAll());
+            answerBoardRepository.save(answerBoard);
+        }
+        return pageDto;
     }
 
     @Override
@@ -122,12 +139,12 @@ public class MainServiceImpl implements MainService {
         CurrentQuestion currentQuestion = currentQuestionRepository.findFirstBy();
 
         PageDto pageDto = new PageDto();
+        CheckAnswerBoard(pageDto);
+
         pageDto.setCurrentQuestion(currentQuestion.getCurrentQuestionName());
         pageDto.setTop(scoreRepository.findAll());
-        if(currentQuestion.isSolved())
-        {
-            pageDto.setHistory(answerBoardRepository.findAll());
-        }
+
+
         return pageDto;
     }
 
