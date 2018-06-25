@@ -22,7 +22,7 @@
 <br>bestVariant : {{page.bestVariant}} owner : {{page.bestVariantOwner}}</br>
 <br>Скоры : </br>
 <ul>
-    <li ng-repeat="item in page">{{item.history.AnswerBoard.email + " " + item.history.AnswerBoard.currentAnswer}}</li>
+    <li ng-repeat="item in page.history">{{item.email + " " + item.currentAnswer}}</li>
 </ul>
 <br>Top : </br>
 <ul>
