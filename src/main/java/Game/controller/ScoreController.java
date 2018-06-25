@@ -20,7 +20,6 @@ public class ScoreController {
 
     private ScoreConvertor scoreConvertor;
 
-    private LoginController loginController;
 
     @PostMapping(name = "/addingScore")
     @ResponseStatus(HttpStatus.CREATED)
