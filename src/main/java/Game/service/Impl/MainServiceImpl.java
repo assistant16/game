@@ -1,5 +1,6 @@
 package Game.service.Impl;
 
+import Game.WebSocket.Sessions;
 import Game.dto.PageDto;
 import Game.dto.ScoreDto;
 import Game.entity.AnswerBoard;
@@ -12,6 +13,7 @@ import Game.repository.QuestionRepository;
 import Game.repository.ScoreRepository;
 import Game.service.MainService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,6 +39,9 @@ public class MainServiceImpl implements MainService {
     @Autowired
     QuestionRepository questionRepository;
 
+    @Autowired
+    Sessions sessions;
+
 
 
     @Override
@@ -53,9 +58,6 @@ public class MainServiceImpl implements MainService {
         } else { bestNumber = variant;
         }
         int answer = currentQuestion.getCurrentAnswer();
-
-
-
 
         if(variant == answer){
             systemResponse = "win";
@@ -88,6 +90,9 @@ public class MainServiceImpl implements MainService {
             currentQuestionRepository.save(newQuestionForSave);
             bestNumber = variant;
 
+            sessions.broadcast("refresh");
+
+
         } else {
             if (Math.abs(variant - answer) <= Math.abs(bestNumber - answer)) {
                 AnswerBoard newAnswerBoard = new AnswerBoard();
@@ -98,6 +103,9 @@ public class MainServiceImpl implements MainService {
 
 
                 answerBoardRepository.save(newAnswerBoard);
+
+                sessions.broadcast("refresh");
+
 
                 systemResponse = "It's better";
             } else {
@@ -112,23 +120,24 @@ public class MainServiceImpl implements MainService {
 
         pageDto.setTop(scoreRepository.findAll());
 
+
+
         return pageDto;
 
     }
 
+    public Sort sortByIdAsc() {
+        return new Sort(Sort.Direction.DESC, "id");
+    }
+
+
     public  PageDto CheckAnswerBoard(PageDto pageDto){
-        public Iterable<PageDto> findAll(
-                @Spec(path = "firstName", spec = Like.class) Specification<Customer> spec) {
-
-            return customerRepo.findAll(spec);
-        }
-
-        if(answerBoardRepository.findTop1ByOrderByIdDesc()!= null){
+                if(answerBoardRepository.findTop1ByOrderByIdDesc()!= null){
             pageDto.setBestVariant(String.valueOf(answerBoardRepository.findTop1ByOrderByIdDesc().getCurrentAnswer()));
             pageDto.setBestVariantOwner(String.valueOf(answerBoardRepository.findTop1ByOrderByIdDesc().getEmail()));
             AnswerBoard answerBoard = answerBoardRepository.findTop1ByOrderByIdDesc();
             answerBoardRepository.delete(answerBoardRepository.findTop1ByOrderByIdDesc());
-            pageDto.setHistory(answerBoardRepository.findAll());
+            pageDto.setHistory(answerBoardRepository.findAll(sortByIdAsc()));
             answerBoardRepository.save(answerBoard);
         }
         return pageDto;

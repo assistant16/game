@@ -70,6 +70,7 @@ public class GamePuzzleApplication {
 			mainServiceImpl.begin();
 
 		}
+
 //
 //	@Bean
 //	CommandLineRunner runner(UserController userController){
