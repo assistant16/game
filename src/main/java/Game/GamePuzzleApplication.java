@@ -1,20 +1,11 @@
 package Game;
 
-import Game.controller.UserController;
-import Game.entity.CurrentQuestion;
 import Game.entity.Question;
-import Game.entity.User;
-import Game.repository.UserRepository;
-import Game.service.Impl.CurrentQuestionServiceImpl;
 import Game.service.Impl.MainServiceImpl;
 import Game.service.Impl.QuestionServiceImpl;
-import Game.service.Impl.UserServiceImpl;
-import Game.convertor.Impl.UserConvertorImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-
 
 import javax.annotation.PostConstruct;
 
@@ -40,13 +31,9 @@ public class GamePuzzleApplication {
 //	}
 	//@Component
 	//public class StartUpInit {
-	@Autowired
-	UserServiceImpl userServiceImpl;
 
-	@Autowired
-	UserController userController;
 
-	UserConvertorImpl userConvertorImpl;
+
 
 	@Autowired
 	QuestionServiceImpl questionServiceImpl;

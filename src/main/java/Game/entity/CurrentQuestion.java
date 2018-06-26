@@ -11,6 +11,17 @@ public class CurrentQuestion {
     private String currentQuestionName;
     private int currentAnswer;
     private boolean solved = false;
+    private int dataTime;
+
+
+
+    public int getDataTime() {
+        return dataTime;
+    }
+
+    public void setDataTime(int dataTime) {
+        this.dataTime = dataTime;
+    }
 
     public boolean isSolved() {
         return solved;
@@ -40,8 +51,10 @@ public class CurrentQuestion {
     @Override
     public String toString() {
         return "CurrentQuestion{" +
-                ", currentQuestionName='" + currentQuestionName + '\'' +
+                "currentQuestionName='" + currentQuestionName + '\'' +
                 ", currentAnswer=" + currentAnswer +
+                ", solved=" + solved +
+                ", dataTime=" + dataTime +
                 '}';
     }
 }

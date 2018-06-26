@@ -11,4 +11,5 @@ public interface AnswerBoardRepository extends JpaRepository<AnswerBoard,Long> {
     AnswerBoard findLastBy();
     AnswerBoard findTop1ByOrderByIdDesc();
     List<AnswerBoard> findByIdLessThanOrderByIdDesc(long id);
+
 }

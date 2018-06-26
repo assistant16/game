@@ -13,4 +13,5 @@ public interface QuestionService{
     Question addQuestion(Question question);
     List<Question> getAllQuestions();
     Optional<Question> getByIdQuestion(Long id);
+
 }

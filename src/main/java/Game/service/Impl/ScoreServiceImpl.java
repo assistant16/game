@@ -27,4 +27,6 @@ public class ScoreServiceImpl implements ScoreService{
     public Optional<Score> getByIdScore(Long id) {
         return scoreRepository.findById(id);
     }
+
+
 }

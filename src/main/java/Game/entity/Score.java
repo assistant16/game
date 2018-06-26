@@ -11,6 +11,17 @@ public class Score {
     @Id
     private String email;
     private int numberScore;
+    private int dataTime;
+
+    public int getDataTime() {
+        return dataTime;
+    }
+
+    public void setDataTime(int dataTime) {
+        this.dataTime = dataTime;
+    }
+
+
 
     public int getNumberScore() {
         return numberScore;
@@ -29,26 +40,26 @@ public class Score {
     }
 
     @Override
+    public String toString() {
+        return "Score{" +
+                "email='" + email + '\'' +
+                ", numberScore=" + numberScore +
+                ", dataTime=" + dataTime +
+                '}';
+    }
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Score score = (Score) o;
         return numberScore == score.numberScore &&
-
+                dataTime == score.dataTime &&
                 Objects.equals(email, score.email);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash( numberScore, email);
-    }
-
-    @Override
-    public String toString() {
-        return "Score{" +
-                ", numberScore=" + numberScore +
-                ", email='" + email + '\'' +
-                '}';
+        return Objects.hash(email, numberScore, dataTime);
     }
 }
