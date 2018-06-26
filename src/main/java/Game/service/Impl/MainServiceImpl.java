@@ -114,7 +114,7 @@ public class MainServiceImpl implements MainService {
         }
 
 
-        CheckAnswerBoard(pageDto);
+        prepareAnswerBoard(pageDto);
         pageDto.setSystemResponse(systemResponse);
         pageDto.setCurrentQuestion(currentQuestionRepository.findFirstBy().getCurrentQuestionName());//currentQuestion.getCurrentQuestionName());
 
@@ -131,16 +131,26 @@ public class MainServiceImpl implements MainService {
     }
 
 
+
     public  PageDto CheckAnswerBoard(PageDto pageDto){
                 if(answerBoardRepository.findTop1ByOrderByIdDesc()!= null){
             pageDto.setBestVariant(String.valueOf(answerBoardRepository.findTop1ByOrderByIdDesc().getCurrentAnswer()));
             pageDto.setBestVariantOwner(String.valueOf(answerBoardRepository.findTop1ByOrderByIdDesc().getEmail()));
             AnswerBoard answerBoard = answerBoardRepository.findTop1ByOrderByIdDesc();
             answerBoardRepository.delete(answerBoardRepository.findTop1ByOrderByIdDesc());
-            pageDto.setHistory(answerBoardRepository.findAll(sortByIdAsc()));
+            pageDto.setHistory(answerBoardRepository.findAll());
+            //pageDto.setHistory(answerBoardRepository.findAll(sortByIdAsc()));
             answerBoardRepository.save(answerBoard);
         }
         return pageDto;
+    }
+
+    public void prepareAnswerBoard(PageDto pageDto){
+        if (answerBoardRepository.findTop1ByOrderByIdDesc()!=null){
+            pageDto.setBestVariantOwner(String.valueOf(answerBoardRepository.findTop1ByOrderByIdDesc().getEmail()));
+            pageDto.setBestVariant(String.valueOf(answerBoardRepository.findTop1ByOrderByIdDesc().getCurrentAnswer()));
+            pageDto.setHistory(answerBoardRepository.findByIdLessThan(answerBoardRepository.findTop1ByOrderByIdDesc().getId()));
+        }
     }
 
     @Override
@@ -148,7 +158,7 @@ public class MainServiceImpl implements MainService {
         CurrentQuestion currentQuestion = currentQuestionRepository.findFirstBy();
 
         PageDto pageDto = new PageDto();
-        CheckAnswerBoard(pageDto);
+        prepareAnswerBoard(pageDto);
 
         pageDto.setCurrentQuestion(currentQuestion.getCurrentQuestionName());
         pageDto.setTop(scoreRepository.findAll());

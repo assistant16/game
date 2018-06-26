@@ -9,6 +9,7 @@ app.controller('mainController',function ($scope,$http) {
 
     var Game =  {};
 
+
     $scope.socket = null;
     $scope.timer = null;
 
@@ -20,7 +21,7 @@ app.controller('mainController',function ($scope,$http) {
             }, 30000);
         };
         $scope.socket.onclose = function () {
-            $scope.timer.cancel();
+            //$scope.timer.cancel();
         };
         $scope.socket.onmessage = function (message) {
             switch (message.data) {
@@ -30,6 +31,7 @@ app.controller('mainController',function ($scope,$http) {
             }
         };
     });
+
 
     $scope.guess = function (variant) {
         $http.get('app/try?variant=' + variant).then(function (response) {
@@ -43,8 +45,8 @@ app.controller('mainController',function ($scope,$http) {
         });
     };
 
-    $scope.connect();
 
+    $scope.connect();
     $scope.getPage();
 });
 

@@ -11,8 +11,6 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
     @Autowired
     Sessions sessions;
 
-
-
     public GameWebSocketHandler() {
     }
 
