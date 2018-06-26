@@ -10,5 +10,5 @@ import java.util.List;
 public interface AnswerBoardRepository extends JpaRepository<AnswerBoard,Long> {
     AnswerBoard findLastBy();
     AnswerBoard findTop1ByOrderByIdDesc();
-    List<AnswerBoard> findByIdLessThan(long id);
+    List<AnswerBoard> findByIdLessThanOrderByIdDesc(long id);
 }

@@ -149,7 +149,7 @@ public class MainServiceImpl implements MainService {
         if (answerBoardRepository.findTop1ByOrderByIdDesc()!=null){
             pageDto.setBestVariantOwner(String.valueOf(answerBoardRepository.findTop1ByOrderByIdDesc().getEmail()));
             pageDto.setBestVariant(String.valueOf(answerBoardRepository.findTop1ByOrderByIdDesc().getCurrentAnswer()));
-            pageDto.setHistory(answerBoardRepository.findByIdLessThan(answerBoardRepository.findTop1ByOrderByIdDesc().getId()));
+            pageDto.setHistory(answerBoardRepository.findByIdLessThanOrderByIdDesc(answerBoardRepository.findTop1ByOrderByIdDesc().getId()));
         }
     }
 
