@@ -13,6 +13,24 @@ public class PageDto {
     private List<AnswerBoard> history;
     private String bestVariantOwner;
     private List<Score> top;   //or scoreDto?
+    private int newGameDelay;
+    private int answerDelay;
+
+    public int getNewGameDelay() {
+        return newGameDelay;
+    }
+
+    public void setNewGameDelay(int newGameDelay) {
+        this.newGameDelay = newGameDelay;
+    }
+
+    public int getAnswerDelay() {
+        return answerDelay;
+    }
+
+    public void setAnswerDelay(int answerDelay) {
+        this.answerDelay = answerDelay;
+    }
 
     public String getCurrentQuestion() {
         return currentQuestion;

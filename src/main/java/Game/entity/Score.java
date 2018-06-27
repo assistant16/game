@@ -2,6 +2,7 @@ package Game.entity;
 
 import javax.management.StandardEmitterMBean;
 import javax.persistence.*;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -11,17 +12,15 @@ public class Score {
     @Id
     private String email;
     private int numberScore;
-    private int dataTime;
+    private Date dateAnswerGiven;
 
-    public int getDataTime() {
-        return dataTime;
+    public Date getDateAnswerGiven() {
+        return dateAnswerGiven;
     }
 
-    public void setDataTime(int dataTime) {
-        this.dataTime = dataTime;
+    public void setDateAnswerGiven(Date dateAnswerGiven) {
+        this.dateAnswerGiven = dateAnswerGiven;
     }
-
-
 
     public int getNumberScore() {
         return numberScore;
@@ -44,22 +43,8 @@ public class Score {
         return "Score{" +
                 "email='" + email + '\'' +
                 ", numberScore=" + numberScore +
-                ", dataTime=" + dataTime +
+                ", dateAnswerGiven=" + dateAnswerGiven +
                 '}';
     }
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Score score = (Score) o;
-        return numberScore == score.numberScore &&
-                dataTime == score.dataTime &&
-                Objects.equals(email, score.email);
-    }
 
-    @Override
-    public int hashCode() {
-
-        return Objects.hash(email, numberScore, dataTime);
-    }
 }

@@ -10,6 +10,7 @@ app.controller('mainController',function ($scope,$http) {
     var Game =  {};
 
 
+
     $scope.socket = null;
     $scope.timer = null;
 
@@ -36,6 +37,7 @@ app.controller('mainController',function ($scope,$http) {
     $scope.guess = function (variant) {
         $http.get('app/try?variant=' + variant).then(function (response) {
             $scope.page = response.data;
+            variant=' ';
         });
     };
 
@@ -44,10 +46,22 @@ app.controller('mainController',function ($scope,$http) {
             $scope.page = response.data;
         });
     };
+    
+    $scope.countDown= function () {
+        if($scope.page.newGameDelay > 0) {
+            $scope.page.newGameDelay--;
+
+        }
+        if($scope.page.answerDelay>0){
+            $scope.page.answerDelay--;
+        }
+        setTimeout($scope.countDown, 1000);
+    };
 
 
     $scope.connect();
     $scope.getPage();
+    setTimeout($scope.countDown, 1000);
 });
 
 

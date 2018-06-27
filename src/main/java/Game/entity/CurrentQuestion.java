@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.Date;
 
 @Entity
 public class CurrentQuestion {
@@ -11,16 +12,16 @@ public class CurrentQuestion {
     private String currentQuestionName;
     private int currentAnswer;
     private boolean solved = false;
-    private int dataTime;
+    private Date date;
 
 
 
-    public int getDataTime() {
-        return dataTime;
+    public Date getDate() {
+        return date;
     }
 
-    public void setDataTime(int dataTime) {
-        this.dataTime = dataTime;
+    public void setDate(Date dataTime) {
+        this.date = dataTime;
     }
 
     public boolean isSolved() {
@@ -54,7 +55,7 @@ public class CurrentQuestion {
                 "currentQuestionName='" + currentQuestionName + '\'' +
                 ", currentAnswer=" + currentAnswer +
                 ", solved=" + solved +
-                ", dataTime=" + dataTime +
+                ", date=" + date +
                 '}';
     }
 }

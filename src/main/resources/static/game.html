@@ -14,12 +14,19 @@
 </head>
 <body  ng-app="app" ng-controller="mainController">
 <br>
-<button type="button" class="btn btn" ng-click="getPage()">GetPage</button>
-<input type="text" class="form-control" name="variant" id="variantId"
-       placeholder="Enter variant" ng-model="variant"/>
-<button type="button" class="btn btn" ng-click="guess(variant)">Guess</button>
+<button type="button" class="btn btn" ng-click="getPage()" >GetPage</button>
+<form>
+    <input type="text" class="form-control" name="variant" id="variantId"
+           placeholder="Enter variant" ng-model="variant"/>
+    <button id="Guess_button" class="btn btn" ng-click="guess(variant)">Guess</button>
+</form>
+<script>
+    document.getElementById("Guess_button").onclick = function(e){
+    document.getElementById("variantId").value = "";}
+</script>
+<!--<div ng-model="page.newGameDelay"/>-->
 
-<br>Current question : {{page.currentQuestion}}</br>
+<br>Current question : {{page.currentQuestion}}  Time to new game: {{page.newGamedelay}} </br>
 <br>systemResponse : {{page.systemResponse}}</br>
 <br>bestVariant : {{page.bestVariant}} owner : {{page.bestVariantOwner}}</br>
 <br>Скоры : </br>
