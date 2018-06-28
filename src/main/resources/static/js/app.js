@@ -52,89 +52,19 @@ app.controller('mainController',function ($scope,$http) {
             $scope.page.newGameDelay--;
 
         }
-        if($scope.page.answerDelay>0){
-            $scope.page.answerDelay--;
+        if($scope.page.newAnswerDelay > 0){
+            $scope.page.newAnswerDelay--;
         }
         setTimeout($scope.countDown, 1000);
+        $scope.$apply();
     };
 
 
     $scope.connect();
     $scope.getPage();
     setTimeout($scope.countDown, 1000);
+
+    document.getElementById("Guess_button").onclick = function(e){
+        document.getElementById("variantId").value = "";}
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//
-//
-//
-// app.controller('getEmail',function ($scope, $http) {
-//
-//     $scope.something1 = "wtf";
-//     $scope.something2 = "da";
-//     $http.get('http://localhost:8080/api/email/get').then(function (response) {
-//         $scope.user = response.data;
-//         $scope.email = response.data.principal.attributes.email;
-//         $scope.something1 = "wtf2";
-//         $scope.something2 = "da2";
-//     });
-// });
-//
-//
-//
-// app.controller('getRandomQuestionController', function ($scope,$http) {
-//
-//     $scope.RandomQuestion="";
-//
-//     $scope.getRandomQuestion = function () {
-//         $http.get('http://localhost:8080/api/question/RandomQ').then(function (response) {
-//
-//             $scope.RandomQuestion = response.data;
-//         });
-//     };
-//
-//     $scope.getEmail = function () {
-//         var url = 'http://localhost:8080/api/email/get';
-//
-//         $http.get(url).then(function (response) {
-//             $scope.someEmail = response.data;
-//             $scope.something1 = "wtf";
-//             $scope.something2 = "da";
-//         });
-//     };
-//
-//
-//
-//
-//
-// app.controller('postUserController', function($scope, $http) {
-//     $scope.submitForm = function(item) {
-//
-//         var url = 'http://localhost:8080/api/user/adding';
-//
-//         $http.post(url, item).then(function (response) {
-//             $scope.item = response.data;
-//         });
-//
-//         $scope.name = "";
-//         $scope.password = "";
-//         $scope.email = "";
-//     }
-// });
-//

@@ -1,5 +1,5 @@
 <!DOCTYPE html >
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 <head>
     <title>mainPageTitle</title>
     <meta charset="UTF-8" name="google-signin-client_id"
@@ -9,30 +9,67 @@
     <script src="/webjars/sockjs-client/sockjs.min.js"></script>
     <script src="/webjars/stomp-websocket/stomp.min.js"></script>
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
     <script type="text/javascript" src="js/angular.min.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
 </head>
-<body  ng-app="app" ng-controller="mainController">
-<br>
-<button type="button" class="btn btn" ng-click="getPage()" >GetPage</button>
-<form>
-    <input type="text" class="form-control" name="variant" id="variantId"
-           placeholder="Enter variant" ng-model="variant"/>
-    <button id="Guess_button" class="btn btn" ng-click="guess(variant)">Guess</button>
-</form>
-<script>
-    document.getElementById("Guess_button").onclick = function(e){
-    document.getElementById("variantId").value = "";}
-</script>
-<!--<div ng-model="page.newGameDelay"/>-->
 
-<br>Current question : {{page.currentQuestion}}  Time to new game: {{page.newGamedelay}} </br>
-<br>systemResponse : {{page.systemResponse}}</br>
-<br>bestVariant : {{page.bestVariant}} owner : {{page.bestVariantOwner}}</br>
-<br>Скоры : </br>
-<ul>
-    <li ng-repeat="item in page.history">{{item.email + " " + item.currentAnswer}}</li>
-</ul>
+    <body  ng-app="app" ng-controller="mainController">
+
+    <button type="button" class="btn btn" style="margin-left: 10px" ng-click="getPage()" >GetPage</button>
+
+    <p style="margin-left: 120px">Current question : {{page.currentQuestion}}  Time to new game: {{page.newGameDelay}} </p>
+
+    <form class="form-horizontal" style="margin-top: 30px" name="AnswerForm" >
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="variantId">Answer:</label>
+            <div class="col-sm-5">
+                <input type="text" class="form-control" name="answer" id="variantId"
+                       placeholder="Enter answer" ng-model="variant"/>
+                <button id="Guess_button" type="submit" class="btn btn-try" ng-click="guess(variant)">Guess</button>
+                <div>delay : {{page.newAnswerDelay}}</div>
+            </div>
+        </div>
+    </form>
+    <script>
+
+    </script>
+    <!--<form>-->
+        <!--<input type="text" class="form-control" name="variant" id="variantId"-->
+               <!--placeholder="Enter variant" ng-model="variant"/>-->
+        <!--<button id="Guess_button" class="btn btn" >Guess</button>-->
+    <!--</form>-->
+
+
+
+
+<p style="margin-left: 120px" class="SystemResponse">systemResponse : {{page.systemResponse}}</p>
+    <p style="margin-left: 120px">bestVariant : {{page.bestVariant}} owner : {{page.bestVariantOwner}}</p>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">Top answers</div>
+                <div class="panel-body">
+                    <table class="table table-striped" />
+                        <tbody>
+                        <tr ng-repeat="item in page.history">
+                                    <td>{{item.email}} </td>
+                                    <td>{{item.currentAnswer}} </td>
+                        </tr>
+                        </tbody>
+                    </table>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--<ul>-->
+    <!--<li ng-repeat="item in page.history">{{item.email + " " + item.currentAnswer}}</li>-->
+<!--</ul>-->
 <br>Top : </br>
 <ul>
     <li ng-repeat="item2 in page.top">{{item2.email + " " + item2.numberScore}}</li>

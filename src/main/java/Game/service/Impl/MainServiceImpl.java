@@ -25,7 +25,8 @@ import java.util.*;
 @Transactional
 public class MainServiceImpl implements MainService {
 
-    public static final int GAME_DELAY = 30000;
+    public static final int GAME_DELAY = 15000;
+    public static final int ANSWER_DELAY = 5000;
     @Autowired
     AnswerBoardRepository answerBoardRepository;
 
@@ -49,6 +50,8 @@ public class MainServiceImpl implements MainService {
 
         int bestNumber;
         String systemResponse;
+        long newAnswerDelay=0L;
+
         AnswerBoard bestVariant = answerBoardRepository.findTop1ByOrderByIdDesc();
 
         CurrentQuestion currentQuestion = currentQuestionRepository.findFirstBy();
@@ -57,8 +60,6 @@ public class MainServiceImpl implements MainService {
 
         PreparingScors(email);
 
-
-
         if (bestVariant != null) { bestNumber = bestVariant.getCurrentAnswer(); }
         else {
             bestNumber = variant;
@@ -66,10 +67,15 @@ public class MainServiceImpl implements MainService {
         }
 
 
-        if (new Date().getTime() - scoreRepository.findByEmail(email).getDateAnswerGiven().getTime() < 2000) {
+
+
+
+        if (new Date().getTime() - scoreRepository.findByEmail(email).getDateAnswerGiven().getTime() < 2000 && FirstNumberFlag==1) {
             long elapsedAfterSendVariant = (System.currentTimeMillis() - scoreRepository.findByEmail(email).getDateAnswerGiven().getTime());
-            long newGameDelay = (3000 - elapsedAfterSendVariant) / 1000;
-            systemResponse="wait some time :" +  newGameDelay + "s";
+            newAnswerDelay = (ANSWER_DELAY - elapsedAfterSendVariant) / 1000;
+            systemResponse = " ";
+
+
 
         }
             else {
@@ -78,7 +84,7 @@ public class MainServiceImpl implements MainService {
             if (variant == answer) {                                   /////check if won
 
                 plusOneToScore(email);
-                systemResponse = "win";
+
                 currentQuestion.setSolved(true);
                 SaveBestNumberAndDate(variant, email);
                 sessions.broadcast("refresh");
@@ -89,21 +95,28 @@ public class MainServiceImpl implements MainService {
                     @Override
                     public void run() {
                         begin();
+                        sessions.broadcast("refresh");
 
 
                     }
                 }, GAME_DELAY);
+                //findByIdLessThanOrderByIdDesc
+                //answerBoardRepository.deleteAll();
 
                 Date date = new Date();
                 CurrentQuestion currentQuestion1 = currentQuestionRepository.findFirstBy();
                 currentQuestion1.setDate(date);
                 currentQuestionRepository.save(currentQuestion1);
 
+                systemResponse = "win";
+
             } else {
-                if (Math.abs(variant - answer) == Math.abs(bestNumber - answer) && (FirstNumberFlag == 0)) {   //need to replace
+                if ((FirstNumberFlag == 0)) {   //need to replace Math.abs(variant - answer) == Math.abs(bestNumber - answer) &&
                     SaveBestNumberAndDate(variant, email);
                     sessions.broadcast("refresh");
                     systemResponse = "Great begin";
+                    //FirstNumberFlag = 1;
+
                 } else {
                     if (Math.abs(variant - answer) < Math.abs(bestNumber - answer)) {
 
@@ -119,6 +132,7 @@ public class MainServiceImpl implements MainService {
         }
         PageDto pageDto = this.getPage();
         pageDto.setSystemResponse(systemResponse);
+        pageDto.setNewAnswerDelay((int) newAnswerDelay);
         return pageDto;
     }
 
@@ -129,7 +143,6 @@ public class MainServiceImpl implements MainService {
         CurrentQuestion currentQuestion = currentQuestionRepository.findFirstBy();
 
         PageDto pageDto = new PageDto();
-
         prepareAnswerBoard(pageDto);
         pageDto.setCurrentQuestion(currentQuestion.getCurrentQuestionName());
         pageDto.setTop(scoreRepository.findAllByOrderByNumberScoreDesc());
@@ -139,6 +152,9 @@ public class MainServiceImpl implements MainService {
             if (newGameDelay > 0) {
                 pageDto.setNewGameDelay((int) newGameDelay);
             }
+//            if((int)newGameDelay == 0) {
+//               begin();
+//            }
         }
         return pageDto;
     }
@@ -155,6 +171,7 @@ public class MainServiceImpl implements MainService {
                 Date savedDate = forCheck.getDate();
                 currentQuestion.setDate(savedDate);
             }
+            answerBoardRepository.deleteAll();
             currentQuestionRepository.deleteAll();
             currentQuestion.setCurrentQuestionName(RandomQuestion.getQuestion());
             Random random = new Random();
