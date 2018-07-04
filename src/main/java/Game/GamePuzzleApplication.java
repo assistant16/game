@@ -49,9 +49,11 @@ public class GamePuzzleApplication {
 		public void init() {
 
 			//UserController userController = new UserController();
-			questionServiceImpl.addQuestion(new Question("what's wrong?"));
-			questionServiceImpl.addQuestion(new Question("what's else?"));
-			questionServiceImpl.addQuestion(new Question("how r u?"));
+			questionServiceImpl.addQuestion(new Question("first question"));
+			questionServiceImpl.addQuestion(new Question("second question"));
+			questionServiceImpl.addQuestion(new Question("third question"));
+			questionServiceImpl.addQuestion(new Question("fourth question"));
+			questionServiceImpl.addQuestion(new Question("fifth question"));
 
 			//currentQuestionService.addCurrentQuestion(new CurrentQuestion("what's wrong"));
 			mainServiceImpl.begin();

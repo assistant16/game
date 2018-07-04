@@ -7,12 +7,15 @@ import org.springframework.data.domain.jaxb.SpringDataJaxb;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.security.Principal;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/app")
 public class MainController {
+
+        HttpSession session;
 
 
         @Autowired
@@ -28,8 +31,8 @@ public class MainController {
         }
 
         @GetMapping(value = "/show")
-        public PageDto getPage(){
-            return mainServiceImpl.getPage();
+        public PageDto getPage(HttpSession session){
+            return mainServiceImpl.getPage(session);
         }
 
 

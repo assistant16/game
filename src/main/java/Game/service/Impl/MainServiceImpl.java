@@ -14,12 +14,12 @@ import Game.service.MainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import sun.reflect.generics.scope.Scope;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.*;
+import javax.servlet.http.HttpSession;
+import java.util.Date;
+import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 @Service
 @Transactional
@@ -27,6 +27,10 @@ public class MainServiceImpl implements MainService {
 
     public static final int GAME_DELAY = 15000;
     public static final int ANSWER_DELAY = 5000;
+
+    @Autowired
+    HttpSession session;
+
     @Autowired
     AnswerBoardRepository answerBoardRepository;
 
@@ -46,7 +50,7 @@ public class MainServiceImpl implements MainService {
 
 
     @Override
-    public PageDto guess(int variant, String email) {
+    public synchronized PageDto guess(int variant, String email) {
 
         int bestNumber;
         String systemResponse;
@@ -73,13 +77,10 @@ public class MainServiceImpl implements MainService {
         if (new Date().getTime() - scoreRepository.findByEmail(email).getDateAnswerGiven().getTime() < 2000 && FirstNumberFlag==1) {
             long elapsedAfterSendVariant = (System.currentTimeMillis() - scoreRepository.findByEmail(email).getDateAnswerGiven().getTime());
             newAnswerDelay = (ANSWER_DELAY - elapsedAfterSendVariant) / 1000;
-            systemResponse = " ";
-
-
+            systemResponse = " for example ";
 
         }
             else {
-
 
             if (variant == answer) {                                   /////check if won
 
@@ -110,6 +111,7 @@ public class MainServiceImpl implements MainService {
 
                 systemResponse = "win";
 
+
             } else {
                 if ((FirstNumberFlag == 0)) {   //need to replace Math.abs(variant - answer) == Math.abs(bestNumber - answer) &&
                     SaveBestNumberAndDate(variant, email);
@@ -130,7 +132,7 @@ public class MainServiceImpl implements MainService {
                 }
             }
         }
-        PageDto pageDto = this.getPage();
+        PageDto pageDto = this.getPage(session);       //some questions
         pageDto.setSystemResponse(systemResponse);
         pageDto.setNewAnswerDelay((int) newAnswerDelay);
         return pageDto;
@@ -138,7 +140,7 @@ public class MainServiceImpl implements MainService {
 
 
     @Override
-    public PageDto getPage() {
+    public PageDto getPage(HttpSession session) {
 
         CurrentQuestion currentQuestion = currentQuestionRepository.findFirstBy();
 
